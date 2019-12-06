@@ -1,0 +1,78 @@
+<div data-modul='projectControl' class='bodyContainer' >
+	<div class='container'>
+		<div class='b-title' >
+			<div class='b-title-left' >
+				<div class='b-t-l-title' >
+					<span class='proTitleRed' data-id="projectTitle" >---</span>
+					<img src='../images/logo.gif' />
+				</div>
+				<div class='b-t-l-subtitle proj proTitleRed' style='user-select:text' data-id="projectPath" >
+					---
+				</div>
+			</div>
+			<div class='b-title-right' >
+				<div class='button blue back' data-event='back' >
+					返回
+				</div>
+			</div>
+		</div>
+		<div class='projHost proTitleRed' style='user-select:text' data-id="projectHost" >
+			---
+		</div>
+
+		<div class='visitButtons' >
+			<div class='button green openSrc' >
+				打开src文件夹
+			</div>
+			<div class='button green openWebSite' >
+				在浏览器中访问
+			</div>
+		</div>
+
+		<!--编译器消息面板 -->
+		<div class='dev-com-console-content' >
+			<div dccc-head >
+				<div class='dccc-headLeft' >
+					ES6/7 + Node#
+				</div>
+				<div class='dccc-headRight'  >
+					<div  ><span>源码目录：</span><label style='user-select:text' class='sourcePath'>-</label></div>
+					<div  ><span>目标目录：</span><label style='user-select:text' class='targetPath'>-</label></div>
+				</div>
+			
+				<div class='button rel-button' >
+					发&nbsp;布&nbsp;应&nbsp;用
+				</div>
+				<div class='button rel-hotDebugger' >
+					在线热调试
+				</div>
+			</div>
+			<table border='0' cellpadding="0" cellspacing="0" class='complierStatus' >
+				<tr>
+					<td>
+						<span></span><label>路径预处理</label>
+					</td>
+					<td>
+						<span></span><label>Less编译</label>
+					</td>
+					<td class='hh-dm' >
+						<span></span><label>node#编译</label>
+					</td>
+					<td class='hh-dm' >
+						<span></span><label>es6/7编译</label>
+					</td>
+					<td>
+						<span></span><label>雪碧图处理</label>
+					</td>
+					<td>
+						<span></span><label>Hot-Loader</label>
+					</td>
+				</tr>
+			</table>
+			<div class='console-Content' >
+				
+			</div>
+		</div>
+		<!--编译器消息面板 结束-->
+	</div>
+</div>

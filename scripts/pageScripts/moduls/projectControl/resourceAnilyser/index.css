@@ -1,0 +1,80 @@
+.ra-resourceAnilyser{
+	position: fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color:#ffffff;
+	overflow: hidden;
+}
+.tab-buttons.ra-tb {
+	border-bottom:3px solid #9b85ed;
+}
+.tab-buttons.ra-tb .tab-item{
+	opacity: 1;
+	margin-left: 20px;
+}
+
+.tab-buttons.ra-tb .tab-item.selected{
+	height:46px;
+	margin-top:46px;
+}
+
+
+.ra-alt-line{
+	height: 30px;
+    line-height: 30px;
+    background-color: #b9b9f1;
+    color: #fff;
+    text-indent: 20px;
+    font-size: 14px;
+}
+
+.ra-entryPage-selecter{
+	overflow: hidden;
+}
+
+.ra-e-s-item{
+	height: 50px;
+    line-height: 50px;
+    background-color: #9b85ed;
+    color: #fff;
+    font-size: 32px;
+    margin: 20px;
+    text-indent: 20px;
+    cursor: pointer;
+}
+
+.ra-e-s-item:hover{
+	background-color: #9b90c3;
+}
+
+
+.ani-layer{
+	position: fixed;
+	width:100%;
+	height:100%;
+	bottom:0px;
+	background-color: #fff;
+	display: none;
+}
+
+.chartContainer{
+	width:100%;
+	height:600px;
+	overflow:hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

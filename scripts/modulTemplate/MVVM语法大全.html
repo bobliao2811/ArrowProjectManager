@@ -1,0 +1,86 @@
+<div data-container='main' >
+	<!--文本绑定-->
+	<div class='myFristArrowSite' data-id='myFristArrowSite'  >
+		{{title+'哈哈哈哈哈'}}
+	</div>
+
+	<!--绑定事件-->
+	<button data-event='click:myalt' >点击我弹出对话框</button>
+	<button data-event='click:myask' >点击我弹出确认取消</button>
+	<button data-event='click:consolewhrite' >点击我弹出console</button>
+	<button data-event='click:getData' >获取数据</button>
+	<button data-event='click:newNode' >新加节点</button>
+	<button data-event='click:findText' >查找文本</button>
+	
+	
+	
+	<!--if--else-->
+	<table if='typeof(list) !== "undefined" && list.length !== 0' >
+		<thead>
+			<tr>
+				<td>id </td>
+				<td>用户名</td>
+				<td>日期</td>
+				<td>年龄</td>
+				<td>状态</td>
+			</tr>
+		</thead>
+		<tbody>
+			<!--for循环-->
+			<tr for='list' data-event='click:clickList'>
+				<td  data-event='click:clickaaa' >{{item.id}}</td>
+				<td >{{item.name}}</td>
+				<td if='item.date === "2019/11/11"' >{{item.date}}</td>
+				<td else='this' >日期超时</td>
+				<td >{{item.age}}</td>
+				<td >{{item.status}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div else >
+		没有数据
+	</div>
+
+
+	<div data-id='appendNodeContainer'   >
+	</div>
+
+	<!--将数据绑定到val-->
+	<input type='text' data-bind='val:title' />
+	<input type='text' :data='val:title' />
+
+	<!--将数据绑定到html-->
+	<div data-bind='html:title' ></div>
+	<div :data='html:title' ></div>
+
+	<!--将数据绑定到src-->
+	<div data-bind='src:title' ></div>
+	<div :data='src:title' ></div>
+
+	<!--通过某个函数监视某个数据-->
+	<div data-bind='evn(someFunction):title' ></div>
+	<div :data='evn(someFunction):title' ></div>
+
+	<!--将数据绑定到某个attr-->
+	<div data-bind='attr(good):title' ></div>
+	<div :data='attr(good):title' ></div>
+
+	<!--绑定class-->
+	<div class-bind='(aaa===0)->BGBlue' class-bind='dataValue'  class-bind='someFunction()' class-bind='aaa===0?"BGBlue":"BGOrange"' ></div>
+	<div :class='(aaa===0)->BGBlue' :class='dataValue'  :class='someFunction()' :class='aaa===0?"BGBlue":"BGOrange"' ></div>
+
+	<!--绑定attr-->
+	<div attr-bind='(aaa===0)->(text:disabled)' attr-bind='someFunction()' ></div>
+	<div :attr='(aaa===0)->(text:disabled)' :attr='someFunction()' ></div>
+
+	<!--绑定style-->
+	<div style-bind='(aaa===0)->(background-color:#454545)' style-bind='someFunction()' ></div>
+	<div :style='(aaa===0)->(background-color:#454545)' :style='someFunction()' ></div>
+
+	<div f-bind='if(list.length === 0){el.html("保安傻逼")}else{el.html("还是傻逼")}' ></div>
+
+	<!--事件绑定-->
+	<button data-event='click:distoryMvvm' >销毁mvvm对象</button>
+	<button :event='click:distoryMvvm' >销毁mvvm对象</button>
+
+</div>

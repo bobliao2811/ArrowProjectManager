@@ -1,0 +1,118 @@
+<div data-modul='pC-incrementRelease' class='incrementRelease-container' >
+	<div class='ir-title' >
+		<div class='ir-info' >
+			<div class='ir-t-big' >
+				<span>增量发布:</span>
+				<label class='ir-d-title' >-----------/----------</label>
+				<span>主版本号:</span>
+				<label class='ir-d-mainVersion'>N/A</label>
+				<span>上次增量版本号:</span>
+				<label class='ir-d-lastir'>N/A</label>
+			</div>
+			<div  class='ir-t-small' >
+				<span>上次主版本号发布时间：</span>
+				<label class='ir-d-lastRelTime' >N/A</label>      
+				<span>上次增量发布时间：</span> 
+				<label class='ir-d-lastIrRelTime' >N/A</label>
+			</div>
+		</div>
+		<div class='button blue back bbb' >
+			返回
+		</div>
+	</div>
+	<div class='ir-me visitButtons' >
+		<span>将使用主版本为</span>
+		<label class='ir-d-mainVersion' >N/A</label>
+		<span>号的发布配置进行增量发布</span>
+		<div class="button green watchSettings" style='float: right;margin:0px' >
+			参阅发布配置
+		</div>
+	</div>
+	<div class='ir-config-container' >
+		<div class='ir-leftTree' >
+			<div class='ir-treeTitle' >请选择本次增量的文件:</div>
+			<div class='ir-t-container' ><div class='fs-fileSystemView-inset' data-id='projectNode' ></div> </div>
+		</div>
+		<div class='ir-split' >
+			>
+		</div>
+		<div class='ir-tableContainer' >
+			<div class='ir-tc-currentList' >
+				<div class='ir-tc-cl-title' >
+					本次增量版本号：<span>N/A</span>，本次增量文件列表请在左边文件树中进行选择：
+					<label>0个文件</label>
+				</div>
+				<table class='ir-listTable current' border='0' cellpadding="0" cellspacing="0" >
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>文件名</th>
+							<th>文件相对路径</th>
+							<th>文件完整路径</th>
+						</tr>
+					</thead>
+					<tbody class='ir-currentList' >
+						<tr>
+							<td colspan="4" >请在左侧选择需要增量的文件,发布之前请仔细核对文件!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class='ir-tc-hisLists' >
+				
+			</div>
+		</div>
+	</div>
+	<div class='rel-settings-container ir-rsc' >
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >合并处理</div>
+			<p data-settings="combineSettings_combineEngineToEntryPages" >合并入口页中arrowJs引用</p>
+			<p data-settings="combineSettings_combineHtmlAndCssToMainOfModul" >将组件内容合并到组件主程序</p>
+			<p data-settings="combineSettings_execCatchModulToEntryPage" >打包所有组件到入口点页(单页)</p>
+			<p data-settings="combineSettings_execCatchDepsHere" >CatchDepsHere</p>
+			<p data-settings="combineSettings_execCatchUsingHere" >CatchUsingHere/CatchLinkHere</p>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >javascript处理</div>
+			<p data-settings="javaScriptSettings_compress" >一般压缩(去注释/换行/空格)</p>
+			<p data-settings="javaScriptSettings_clearDebugCode" >去除调试代码块</p>
+			<p data-settings="javaScriptSettings_evalObfuscation" >Eval混淆</p>
+			<p data-settings="javaScriptSettings_AESEncryption" >js -> dll(不兼容IE6/7/8)</p>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >css处理</div>
+			<p data-settings="cssSettings_compress" >一般压缩(去注释/换行/空格)</p>
+			<p data-settings="cssSettings_combineCssesToCommonCss" >组件中css合并到common.css</p>
+			<!--
+			<p data-settings="cssSettings_imageCssAsyncLoad" >图片css异步加载</p>
+			-->
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >图片处理</div>
+			<!--
+			<p data-settings="imagesSettings_spritesOfModuls" >分模块雪碧图(不兼容IE9≤IE)</p>
+			<p data-settings="imagesSettings_spritesOfGlobel" >全局雪碧图(不兼容IE9≤IE)</p>
+			-->
+			<p data-settings="imagesSettings_usingTinify" >自动tinyPNG(需要网络链接!)</p>
+			<table data-id='usingTinifySettings' ><tr><td style='width:width: 43px;' >key:</td><td><input type='text' data-id='usingTinifyKey' placeholder="请输入tinyPNG的开发key" value='' /></td></tr></table>
+			<table data-id='usingTinifySettings' ><tr><td colspan="2" style="user-select:text" >访问https://tinypng.com 获得key</td></tr></table>
+			<p data-settings="imagesSettings_CDNImagesHandle" >图片CDN处理</p>
+			<table data-id='imageCDNsettings' ><tr><td>发布到:</td><td><input type='text' data-id='CDNImageRelPath' value='' /></td></tr>
+				<tr><td>Host:</td><td><input type='text' data-id='CDNImageHost' value='' /></td></tr></table>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >其它处理</div>
+			<p data-settings="otherSettings_compressEntryPage" >压缩html入口点页面</p>
+			<p data-settings="otherSettings_AESEncryptionFileNameAndForderName" >文件名称以及文件夹名称加密</p>
+		</div>
+	</div>
+	<div class='bottom-button-container' >
+		<div class="button red" data-event="rel-inc">
+				确认并发布
+		</div>
+	</div>
+</div>

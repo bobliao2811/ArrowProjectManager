@@ -1,0 +1,89 @@
+<!--ArrowCommand:EntryPage-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>欢迎使用Arrowjs</title>
+	<script  type="text/javascript" data-config='true' >
+		//arrowExpress的系统配置
+		window.arrowConfig = {
+			//热更新端口号
+			arrow_hotLoaderPort:'',
+			baseUrl:'',
+			//version为字符空时表示没有版本号
+			//为true时，每次请求自动生成版本号
+			//写死时使用写死的版本号
+			version:'',
+			//请求js文件时不要使用xhr请求
+			javascriptXHR:false,
+			//是否自动处理css
+			//默认为是，不用更改
+			isAutoHandleCss:true,
+		  	//src :源码环境
+		  	//test:测试环境
+		  	//gray:灰度环境
+		  	//rel :发布环境（正式环境）
+		  	//此处不用刻意更改，打包器会视其发布环境而更改
+		 	mode:'src'
+		}
+	</script>
+	<!--引入Arrow系统的引擎-->
+	<script type="text/javascript"  data-engine='true' src='/arrowSystem/arrowExpress.js' ></script>
+	<!--引入ArrowHotLoader 只用于开发环境，发布时将自动删除-->
+	<script type="text/javascript"  data-engine='true' src='/arrowSystem/arrowHotLoader.js' ></script>
+	<!--引导程序进入入口点-->
+	<script type="text/javascript" data-enterPort='true' >
+		//页面就绪时，引入jquery,common,ajaxproxy,arrowBase四个关键组件
+		zZ(document).ready(function(){
+			var jqueryUrl = '';
+			/*
+			*框架兼容性设置部分
+			*ie8以及以下使用jquery-low-version.js
+			*ie8以上使用jquery-high-version.js
+			*/
+			if(zZ.fn.Borwser() === "msie 8.0" 
+			    || zZ.fn.Borwser() === "msie 7.0"
+				|| zZ.fn.Borwser() === "msie 6.0"
+				|| zZ.fn.Borwser() === "msie 5.0"){
+				jqueryUrl = '/arrowSystem/jquery-low-version.js';
+			}else{
+				jqueryUrl = '/arrowSystem/jquery-high-version.js';
+			}
+			//请求jquery,common,ajaxproxy,arrowBase四个关键组件
+
+			//使用CatchRequire再打包时将之下的组件合并过来
+			//使用下面这行命令将模块进行缓存
+			"<!--ArrowCommand:CatchUsingHere-->";
+			using([jqueryUrl,'/common/common.js','/common/ajaxProxy.js','/common/arrowBase.js','/compoments/main/main.js'],function(_jquery,_common,_ajaxProxy,_arrowBase,_main){
+				//初始化jquery
+				window.$ = window.jQuery = _jquery;
+				//初始化common
+				window.ac = new _common({parent:window});
+				//初始化ajaxproxy
+				window.ac.init(function(){
+					window.ac.ajaxProxy = new _ajaxProxy({});
+					window.ac.ajaxProxy.init(self.common,window);
+					//初始化arrowbase
+					window.arrowBase = _arrowBase;
+					
+					//继承arrowBase基类
+					//只需要main组件做这件事就行了，
+					//其它组件使用this.usingCompoment自动继承基类
+					//此处无需修改
+					var obj = new window.arrowBase({
+						parent:window,
+						main:"this",
+						thisUrl:'/compoments/main/main.js'
+					});
+					//主程序入口点
+					_main.call(obj);
+					obj.init();
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<container id='main' />
+</body>
+</html>

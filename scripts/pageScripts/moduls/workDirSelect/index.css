@@ -1,0 +1,350 @@
+/**主框架通用css**/
+*{outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);font-family:"黑体";cursor: default;}
+html,body,div{
+	-webkit-text-size-adjust:none;
+	cursor: default;border:0px;
+	/*阻止用户选择*/
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+body,html{font-size: 12px; margin:0px 0px 0px 0px ; padding:0px 0px 0px 0px ; background-color: #efefef;  font-family:"黑体"; overflow:hidden; overflow-y: auto;  ;cursor: default;}
+.clearFix{ clear:both; overflow:hidden; font-size:0px; height:0px}
+img{margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;  border:0px; display:block}
+a{ text-decoration:none; color:#0000ff; cursor:pointer;margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;}
+a{
+	color:#809fce;
+	font-size: 14px;
+}
+p,ul,li,a,div{margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;cursor: default;}
+
+/*滚动条样式*/
+::-webkit-scrollbar/*整体部分*/
+{
+    width: 0.75rem;
+    height:0.75rem;
+}
+
+::-webkit-scrollbar-track/*滑动轨道*/
+{
+    -webkit-box-shadow: inset 0 0 0.25rem rgba(67,67,67,1);
+    border-radius: 0px;
+    background:#ffffff;
+}
+
+::-webkit-scrollbar-thumb/*滑块*/
+{
+    border-radius: 0.25rem;
+    -webkit-box-shadow: inset 0 0 0.25rem rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb:hover/*滑块效果*/
+{
+    border-radius: 0.25rem;
+    -webkit-box-shadow: inset 0 0 0.25rem rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.6);
+}
+/*滚动条样式*/
+
+
+.n-c-container{
+	min-height: 20px;
+}
+
+.bodyContainer{
+	padding: 60px 0px 0px 60px;
+	overflow: auto;
+}
+
+.b-title{
+	overflow: hidden;
+}
+
+.b-title-left{
+	overflow: hidden;
+	float: left;
+	display: inline-block;
+}
+
+.b-t-l-title{
+	overflow: hidden;
+	height:60px;
+}
+
+.b-t-l-title span{
+	font-size: 60px;
+	line-height: 60px;
+	color:#202020;
+}
+
+.b-t-l-title img{
+	display: inline-block;
+}
+
+.b-t-l-subtitle{
+	color:#626262;
+	font-size: 36px;
+}
+
+.b-title-right{
+	float:right;
+	margin-top: 17px;
+}
+
+.button{
+	height:68px;
+	width: 167px;
+	overflow: hidden;
+	font-size: 24px;
+	background-color: #ccc;
+	color: #fff;
+	text-align: center;
+	line-height: 68px;
+	cursor: pointer;
+	transition: all 0.1s
+}
+
+.button:hover{
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.4) inset;
+}
+
+.button.blue{
+	background-color: #009fe6;
+}
+
+.button.blue:hover{
+	background-color: #1082b5;
+}
+
+.button.blue:active{
+	background-color: #76c1e2;
+}
+
+.button.plus{
+	background-image: url(../images/plusIcon.gif);
+	background-repeat: no-repeat;
+	background-position: 23px center;
+	text-indent: 32px;
+}
+
+.button.back{
+	background-image: url(../images/back.png);
+	background-repeat: no-repeat;
+	background-position: 23px center;
+	text-indent: 32px;
+}
+
+.workDirSelectList{
+	overflow: hidden;
+	margin-top: 50px;
+}
+
+.workDirSelectList .ListItem{
+	background-color: #009fe6;
+	overflow: hidden;
+	margin-bottom:20px;
+	transition: all 0.1s;
+}
+
+.workDirSelectList .ListItem:hover{
+	background-color: #078bc6;
+}
+
+.workDirSelectList .ListItem:active{
+	background-color: #a7e4ff;
+}
+
+.workDirSelectList .ListItem .li-index{
+	height:133px;
+	font-size: 36px;
+	line-height: 40px;
+	color:#fff;
+	float: left;
+	display: inline-block;
+	text-indent: 10px;
+	margin-right: 10px;
+}
+
+.workDirSelectList .ListItem .li-description{
+	overflow: hidden;
+	float: left;
+	display: inline-block;
+}
+
+
+.workDirSelectList .ListItem .li-description .li-d-title{
+	line-height: 40px;
+}
+
+.workDirSelectList .ListItem .li-description .li-d-title span{
+	font-size: 30px;
+	color:#fff;
+}
+
+.workDirSelectList .ListItem .li-description .li-d-title label{
+	font-size:14px;
+	color:#fff;
+}
+
+.workDirSelectList .ListItem .li-description .li-d-phycDir{
+	color:#fff;
+	font-size: 24px;
+	line-height: 35px;
+}
+
+.workDirSelectList .ListItem .li-description .li-d-baseUrl{
+	color:#fff;
+	font-size: 24px;
+	line-height: 35px;
+}
+
+.workDirSelectList .ListItem  .li-operations{
+	height:133px;
+	line-height:133px;
+	color:#fff;
+	font-size: 24px;
+	margin-left: 20px;
+	text-align:center;
+	width:auto;
+}
+
+.workDirSelectList .ListItem  .li-operations span{
+	cursor:pointer;
+	transition: all 0.1s
+}
+
+.workDirSelectList .ListItem  .li-operations span:hover,
+.workDirSelectList .ListItem .li-going-to-button:hover{
+	text-shadow: 0px 0px 5px rgba(0,0,0,0.4);
+}
+
+.workDirSelectList .ListItem  .li-operations span:active,
+.workDirSelectList .ListItem .li-going-to-button:active{
+	text-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+}
+
+.workDirSelectList .ListItem .li-going-to-button{
+	font-size: 24px;
+	color:#fff;
+	width:133px;
+	height:133px;
+	line-height: 133px;
+	text-align: center;
+	display: inline-block;
+	float: right;
+	cursor: pointer;
+	transition: all 0.1s;
+	border-left:3px solid #efefef;
+}
+
+.addNewWorkSpacelayer{
+	display: none;
+	z-index: 999;
+	position: fixed;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+	background-color:rgba(255,255,255,0.4);
+}
+
+.bodyContainer.flaxable{
+	position: fixed;
+	top:0px;
+	left: 0px;
+	width:100%;
+	height:100%;
+	background-color: #efefef;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.bodyContainer.layer{
+	position: fixed;
+	top:0px;
+	left: 0px;
+	width:100%;
+	height:100%;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background-color: rgba(255,255,255,0.6);
+}
+
+.bodyContainer.flaxable .container{
+	margin: 60px 0px 0px 60px;
+}
+
+
+.textInputBig{
+	overflow: hidden;
+	height:62px;
+	width: 468px;
+	border:2px solid #c0c0c0;
+	background-color: #fff;
+}
+
+.textInputBig input{
+	height:62px;
+	width: 468px;
+	border:0px;
+	line-height: 62px;
+	padding: 0px;
+	margin: 0px;
+	text-indent: 20px;
+	font-size: 20px;
+	color:#545454;
+	font-weight: bold;
+	font-family: 'Arial';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

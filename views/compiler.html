@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            欢迎使用ArrowJs
+        </title>
+        <script>
+            //框架配置文件
+            window.arrowConfig = {
+                baseUrl:'../',
+                version:'',
+                javascriptXHR:false,
+                isAutoHandleCss:true
+            }
+        </script>
+        <script type="application/javascript" src="../scripts/pageScripts/arrowExpress.js" ></script>
+        <script type="text/javascript">
+            window.$ = window.jQuery = using('scripts/pageScripts/jquery.js');
+        </script>
+    </head>
+    <body>
+    </body>
+    <script>
+        zZ(document).ready(function(){
+            using(['scripts/pageScripts/common/common.js','scripts/pageScripts/moduls/compiler/index.js'],function(_common,_compiler){
+                window.ac = new _common();
+                 //初始化公用函数模块
+                window.ac.init(function(){
+                    window.compiler = new _compiler();
+                    window.compiler.init();
+                });
+            });
+        });
+    </script>
+</html>.html

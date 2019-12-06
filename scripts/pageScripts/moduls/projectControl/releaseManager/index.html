@@ -1,0 +1,153 @@
+<div data-modul='pC-relManager' class='relManager-container' >
+	<div class='topContainer' >
+		<div class='headAndBack' >
+			<div class='t-a-b' >
+				<div class='tab-titile' >
+					发布应用:<span class='projectName' >---</span>
+				</div>
+				<div class="visitButtons">
+					<div class="button green resourceAnilyser">
+						项目资源分析
+					</div>
+				</div>
+			</div>
+			<div class="button blue back bbb" data-event="back">
+				返回
+			</div>
+		</div>
+
+		<div class='tab-buttons' >
+			<!--
+			<div class='tab-item selected' >
+				测试发布
+				<p>mode:'test'</p>
+			</div>
+			<div class='tab-item' >
+				灰度发布
+				<p>mode:'gray'</p>
+			</div>
+			<div class='tab-item' >
+				正式发布
+				<p>mode:'rel'</p>
+			</div>
+			<div class='tab-item' >
+				+
+			</div>
+		-->
+		</div>
+	</div>
+	<div class='release-configs' >
+		<table class='relconfigTable' border='0' cellspacing="0" cellpadding="0" >
+			<tr>
+				<td style="width:75px;">
+					从:
+				</td>
+				<td data-id='fromPath' >
+					-
+				</td>
+				<td style="width:140px;" >
+					将项资源HOST:
+				</td>
+				<td data-id='fromHost' >
+					-
+				</td>
+			</tr>
+			<tr>
+				<td>
+					发布到：
+				</td>
+				<td>
+					<input type='text' data-id='toPath' value='' placeholder="请填写发布的目标目录" readonly='readonly' />
+				</td>
+				<td>
+					改变成:
+				</td>
+				<td>
+					<input type='text' data-id='toHost' value='' placeholder="请填写发布后访问站点的Host"  />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class='rel-settings-container' >
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >合并处理</div>
+			<p data-settings="combineSettings_combineEngineToEntryPages" >合并入口页中arrowJs引用</p>
+			<p data-settings="combineSettings_combineHtmlAndCssToMainOfModul" >将组件内容合并到组件主程序</p>
+			<p data-settings="combineSettings_execCatchModulToEntryPage" >打包所有组件到入口点页(单页)</p>
+			<p data-settings="combineSettings_execCatchDepsHere" >CatchDepsHere</p>
+			<p data-settings="combineSettings_execCatchUsingHere" >CatchUsingHere/CatchLinkHere</p>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >javascript处理</div>
+			<p data-settings="javaScriptSettings_compress" >一般压缩(去注释/换行/空格)</p>
+			<p data-settings="javaScriptSettings_clearDebugCode" >去除调试代码块</p>
+			<p data-settings="javaScriptSettings_evalObfuscation" >Eval混淆</p>
+			<p data-settings="javaScriptSettings_AESEncryption" >js -> dll(不兼容IE6/7/8)</p>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >css处理</div>
+			<p data-settings="cssSettings_compress" >一般压缩(去注释/换行/空格)</p>
+			<p data-settings="cssSettings_combineCssesToCommonCss" >组件中css合并到common.css</p>
+			<!--
+			<p data-settings="cssSettings_imageCssAsyncLoad" >图片css异步加载</p>
+			-->
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >图片处理</div>
+			<!--
+			<p data-settings="imagesSettings_spritesOfModuls" >分模块雪碧图(不兼容IE9≤IE)</p>
+			<p data-settings="imagesSettings_spritesOfGlobel" >全局雪碧图(不兼容IE9≤IE)</p>
+			-->
+			<p data-settings="imagesSettings_usingTinify" >自动tinyPNG(需要网络链接!)</p>
+			<table data-id='usingTinifySettings' ><tr><td style='width:width: 43px;' >key:</td><td><input type='text' data-id='usingTinifyKey' placeholder="请输入tinyPNG的开发key" value='' /></td></tr></table>
+			<table data-id='usingTinifySettings' ><tr><td colspan="2" style="user-select:text" >访问https://tinypng.com 获得key</td></tr></table>
+			<p data-settings="imagesSettings_CDNImagesHandle" >图片CDN处理</p>
+			<table data-id='imageCDNsettings' ><tr><td>发布到:</td><td><input type='text' data-id='CDNImageRelPath' value='' /></td></tr>
+				<tr><td>Host:</td><td><input type='text' data-id='CDNImageHost' value='' /></td></tr></table>
+		</div>
+
+		<div class='r-s-c-item' >
+			<div class='rsci-title' >其它处理</div>
+			<p data-settings="otherSettings_compressEntryPage" >压缩html入口点页面</p>
+			<p data-settings="otherSettings_AESEncryptionFileNameAndForderName" >文件名称以及文件夹名称加密</p>
+		</div>
+	</div>
+
+	<div class='rel-buttonContainer' >
+		<div class="button red" data-event="rel-total">
+				全量发布
+		</div>
+		<div class="button red" data-event="rel-incremental">
+				增量发布
+		</div>
+	</div>
+
+	<div class='rel-console' >
+		<div class='rel-c-title' >
+			<span>正在发布:</span>
+			<label></label>
+		</div>
+		<div class='rel-container-c-m' >
+			<div class='rel-c' >
+				<p data-rel-settings="combineSettings_combineEngineToEntryPages" >合并入口页中arrowJs引用</p>
+				<p data-rel-settings="combineSettings_combineHtmlAndCssToMainOfModul" >将组件内容合并到组件主程序</p>
+				<p data-rel-settings="combineSettings_execCatchModulToEntryPage" >打包所有组件到入口点页(单页)</p>
+				<p data-rel-settings="javaScriptSettings_compress" >一般压缩(去注释/换行/空格)</p>
+				<p data-rel-settings="javaScriptSettings_clearDebugCode" >去除调试代码块</p>
+				<p data-rel-settings="javaScriptSettings_evalObfuscation" >Eval混淆</p>
+			</div>
+			<div class='rel-m' >
+				
+			</div>
+		</div>
+		<div class='rel-progress' >
+			<div class='rel-p-content' ></div>
+			<div class='rel-p-animate running' ></div>
+			<div class='rel-p-number' >55%</div>
+			<div class='rel-p-button' >发布完成</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,107 @@
+.newProjectContainer{
+	width:738px;
+	height:393px;
+	overflow: hidden;
+	margin: auto;
+	background-color: #fff;
+	box-shadow: 0px 0px 40px rgba(0,0,0,0.6);
+	padding: 18px;
+}
+
+.welcome-settings .ws-title{
+	font-size: 48px;
+	color:#202020;
+}
+
+.welcome-settings .ws-details{
+	margin-top: 20px;
+	font-size: 14px;
+	color:#626262;
+}
+
+.ps-newProjectName{
+	overflow: hidden;
+}
+
+.ps-newProjectName div{
+	float: left;
+	display:inline-block;
+
+}
+
+.ps-newProjectName div.button{
+	height:66px;
+	margin-left: 14px;
+}
+
+.nps-buttonContainer{
+	overflow: hidden;
+	margin-top: 15px;
+}
+
+.nps-buttonContainer div{
+	float: left;
+	display: inline-block;
+}
+
+.nps-buttonContainer div.pathsContainer{
+	overflow: hidden;
+}
+
+.nps-buttonContainer div.pathsContainer p{
+	margin-top: 20px;
+	font-size: 14px;
+	color:#626262;
+}
+
+.nps-buttonContainer div.button{
+	float: right;
+    margin: 0px 85px 0px 0px;
+    height: 66px;
+}
+
+.ws-devStyle{
+	font-size: 24px;
+	color:#202020;
+	padding:17px 0px 17px 0px;
+}
+
+.nps-devStyleSelect{
+	overflow:  hidden;
+}
+
+.nps-devStyleSelect div{
+	display: inline-block;
+	float: left;
+}
+
+.nps-devStyleSelect div.selectDev{
+	height:37px;
+	line-height: 37px;
+	font-size: 24px;
+	padding: 0px 10px 0px 48px;
+	background-image: url(../images/selectDevModeEmpty.png);
+	background-repeat: no-repeat;
+	background-position: 17px center;
+	margin-right: 20px;
+}
+
+.nps-devStyleSelect div.selectDev.selected{
+	background-image: url(../images/es6CompHook.png);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

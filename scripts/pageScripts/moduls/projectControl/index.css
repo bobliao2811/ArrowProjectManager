@@ -1,0 +1,343 @@
+.proTitleRed{
+	color:#8b0000 !important;
+}
+
+.b-t-l-subtitle.proj{
+	color:#626262;
+	font-size: 24px;
+}
+.projHost{
+	font-size: 14px;
+	color:#545454;
+	height:22px;
+	line-height: 22px;
+	font-weight: bold;
+}
+
+.compileModeSelect{
+	height:37px;
+	font-size: 24px;
+	border-bottom:3px solid #009fe6;
+	margin-top: 2px;
+	overflow: hidden;
+}
+
+.compileModeSelect span,.compileModeSelect label{
+	display: inline-block;
+	float: left;
+	height:37px;
+	line-height: 37px;
+}
+
+.compileModeSelect span{
+	color: 545454;
+}
+
+.compileModeSelect label{
+	width: auto;
+	background-color:#d3d3d3;
+	color:#fff;
+	text-align: center;
+	padding:0px 20px 0px 20px;
+	float: right;
+	margin-right: 35px;
+	cursor: pointer;
+}
+
+.compileModeSelect label.selected{
+	background-color: #009fe6;
+	padding-left:48px;
+	background-image: url(../images/es6CompHook.png);
+	background-repeat: no-repeat;
+	background-position: 17px center; 
+}
+
+.compileModeDesc{
+	font-size: 14px;
+	color:#545454;
+	height:22px;
+	line-height: 22px;
+	font-weight: bold;
+}
+
+.visitButtons{
+	overflow: hidden;
+	padding: 10px 0px 10px 0px;
+}
+
+.visitButtons div.button{
+	height:36px;
+	line-height: 36px;
+	font-size: 14px;
+	text-align: center;
+	width:auto;
+	padding:0px 8px 0px 8px;
+	margin-right: 20px;
+	float: left;
+	display: inline-block;
+}
+
+.visitButtons div.button.green{
+	background-color:#bc952e;
+}
+
+.b-dev-panelTitle{
+	padding:30px 0px 37px 0px;
+	font-size: 24px;
+	color:#202020;
+}
+
+.b-dev-panel{
+	width:582px;
+	overflow: hidden;
+	margin: auto;
+}
+
+.b-dev-panel .b-dev-panel-type{
+	height:60px;
+	line-height: 60px;
+	font-size: 30px;
+	color:#fff;
+	background-color:#009fe6;
+	text-align: center;
+}
+
+.b-dev-panel-type-detail{
+	background-color:#bc3131;
+	height:30px;
+	line-height: 30px;
+	color:#fff;
+	text-align: center;
+	font-size: 14px;
+
+}
+
+.b-dev-panel-type-detail span{
+	height:30px;
+	display: inline-block;
+	width: 119px;
+}
+
+
+.b-dev-panel-status{
+	height:323px;
+	background-color:#009fe6;
+	padding:15px;
+	font-size: 24px;
+	line-height: 34px;
+	color:#fff;
+	margin-top: 5px;
+}
+
+.b-dev-panel-status .button.green{
+	background-color:#bc952e;
+	height:78px;
+	line-height: 78px;
+	font-size: 24px;
+	margin: auto;
+	margin-top: 68px;
+	width:335px;
+}
+
+.dev-com-console-content{
+	width:auto;
+	height:auto;
+	background-color:#535353;
+	margin:auto;
+}
+
+.dccc-head{
+	overflow: hidden;
+}
+
+.dccc-headLeft{
+	background-color: #424242;
+    color: #efefef;
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 20px 0px 20px 20px;
+}
+
+.dccc-headRight{
+	float: left;
+	overflow: hidden;
+	margin: 20px 20px 20px 0px;
+}
+
+.dccc-headRight div{
+	background-color: #4d4d4d;
+	padding: 2.5px 5px;
+	font-size:12px; 
+}
+
+.dccc-headRight div span{
+	color:#7a7a7a;
+}
+
+
+.dccc-headRight div label{
+	color:#b7b7b7;
+}
+
+.complierStatus{
+	border-top:2px solid #4d4d4d;
+	
+	width:100%;
+}
+
+.complierStatus tr td{
+	text-align: center;
+	height:24px;
+}
+
+.complierStatus tr td label{
+	color:#fff;
+	font-size: 13.33px;
+	display: inline-block;
+}
+
+.complierStatus tr td span{
+	display: inline-block;
+	height: 4px;
+	width: 4px;
+	border:1px solid #333333;
+	border-radius: 4px;
+	margin: 0px 5px 0px 0px;
+	background-color: #7895c1;
+}
+
+.console-Content{
+	background-color: #282828;
+	overflow: hidden;
+    overflow-y: auto;
+}
+
+div.log-item{
+	font-size: 12px;
+	color:#fff;
+	background-color: #232323;
+	font-size: 12px;
+    color: #fff;
+    background-color: #232323;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+div.log-item span{
+	margin-right: 10px;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #404040;
+    color: #ffffff;
+}
+
+div.log-item span.sysmsg{
+	background-color: #3e523a;
+}
+
+div.log-item span.commsg{
+	background-color: #423d90;
+}
+div.log-item span.errormsg{
+	background-color: #e20505;
+}
+
+.rel-button{
+	width: 167px;
+    height: 38px;
+    line-height: 38px;
+    background-color: #e83d4d;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.4);
+    float: right;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.rel-hotDebugger{
+	width: 167px;
+    height: 38px;
+    line-height: 38px;
+    background-color: #e83d4d;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.4);
+    float: right;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 3px;
+    border-radius: 20px 0px 0px 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,177 @@
+/**
+弹出窗口控件
+**/
+.b-ballWindow{
+	overflow: hidden;
+	position: absolute;
+	top:0px;
+	left:0px;
+	z-index: 1000;
+	float: left;
+	moz-user-select: -moz-none; 
+	-moz-user-select: none; 
+	-o-user-select:none; 
+	-khtml-user-select:none; /* you could also put this in a class */ 
+	-webkit-user-select:none;/* and add the CSS class here instead */ 
+	-ms-user-select:none; 
+	user-select:none;/**禁止选中文字*/ 
+}
+
+.b-ballWindow .b-title{
+	height:34px;
+	line-height:34px;
+	font-size: 18px;
+	color: #eeeeee;
+	background-color: #aaa8e4;
+	cursor: move;
+}
+
+.b-ballWindow .b-title span{
+	color:#eeeeee;
+	font-size: 18px;
+	text-indent: 15px;
+	display: inline-block;
+	float: left;
+}
+
+.b-ballWindow .b-title label{
+	background-image: url(./images/closeIcon.png);
+	/*兼容ie6*/
+	background: none\9; 
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src="./images/closeIcon.png")\9;
+	display: inline-block;
+	float: right;
+	width:17px;
+	height:17px;
+	background-size:17px;
+	margin: 10px 15px 0px 0px;
+	cursor: pointer;
+}
+
+.b-ballWindow .b-window-container{
+	background-color: #f4f5f4;
+	font-size: 16px;
+	color:#535353;
+	padding: 22px;
+}
+
+.b-window-background{
+	width: 100%;
+	top:0px;
+	left:0px;
+	z-index: 999;
+	position: absolute;
+	background-color: #404040;
+	opacity: 0.48;
+	filter: alpha(opacity=48);
+}
+
+.b-w-buttonContainer{
+	background-color: #d8d7da;
+	height:90px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.n-button{
+	border:0px;
+	margin: 0px;
+	padding: 0px;
+	height:50px;
+	line-height:50px;
+	width:auto;
+	background-color: #aaa8e4;
+	color:#eeeeee;
+	font-size: 24px;
+	text-align: center;
+	padding:0px 10px;
+	cursor:pointer;
+}
+
+.n-button:hover{
+	color:#dfdbdb;
+}
+
+.n-button:active{
+	background-image: none;
+	color:#fff;
+	text-shadow:0px 0px 10px rgba(0,0,0,0.2);
+}
+
+
+.b-w-b{
+	width:81px;
+	margin:auto;
+	margin-top:22px; 
+	display: inline-block;
+}
+
+
+
+
+
+/*移动端时使用的样式:竖屏样式*/
+@media (orientation: portrait ){
+	.b-ballWindow{
+		border-radius: 0.2rem 0.2rem 0 0;
+		box-shadow: 0px 0px 0.25rem rgba(0,0,0,0.5);
+	}
+	.b-ballWindow .b-title{
+		height:1.0rem;
+		line-height: 1.0rem;
+		background-color: #efefef;
+	}
+	.b-ballWindow .b-title span{
+		font-size: 0.36rem;
+		color:#545454;
+		text-indent: 0.235rem;
+	}
+	.b-ballWindow .b-title label{
+		margin:0.0rem;
+		width:1.0rem;
+		height:1.0rem;
+		background-image: url(./images/mobile-close.png);
+		background-size: contain;
+	}
+	.b-ballWindow .b-window-container{
+		font-size: 0.3rem;
+		color:#545454;
+		padding:0.15rem 0.45rem;
+	}
+	.b-w-buttonContainer{
+		height:2.1rem;
+		min-height: 0px;
+		padding:0rem 0.395rem 0rem 0.395rem;
+		background-color: #efefef;
+		overflow: hidden;
+	}
+
+	.b-w-buttonContainer:first-child{
+		margin-top: 0;
+	}
+
+
+	.b-w-b{
+		width: 100%;
+		background-color: #66b31a;
+		background-image: none;
+		display: block;
+		margin: 0px;
+		margin-top: 0.245rem;
+		margin-bottom: 0.245rem;
+		height:0.5rem;
+		font-size: 0.36rem;
+		line-height: 0.36rem;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+.arrow-print-item{
+	overflow: hidden;
+	float: left;
+	padding:3px 5px 3px 5px;
+	background-color: #6e6e6e;
+	color:#eeeeee;
+	position: fixed;
+	font-size: 16px;
+	border-right: 30px solid #9c97fe;
+	z-index: 1000;
+}
+
+.arrow-print-element{
+	overflow: hidden;
+	float: left;
+	padding:3px 5px 3px 5px;
+	background-color: #6e6e6e;
+	color:#eeeeee;
+	position: fixed;
+	font-size: 16px;
+	z-index: 1000;
+}
+
+.arrow-console-close{
+   background-image: url(../scripts/pageScripts/common/window/images/closeIcon.png);
+   background-size: 13px;
+	background-repeat: no-repeat;
+	background-position: center;
+	/*兼容ie6*/
+	background: none\9; 
+	background-size:none\9;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src="../scripts/pageScripts/common/window/images/closeIcon.png")\9;
+   height:15px;
+   height:12px\9;
+   width:15px;
+   position:fixed;
+   cursor:pointer;
+   z-index:1001; 
+   left:8px;
+   overflow:hidden;
+}
+
+
+/*移动端时使用的样式:竖屏样式*/
+@media (orientation: portrait ){
+	.arrow-print-item{
+		overflow: hidden;
+		float: left;
+		padding:3px 5px 3px 5px;
+		background-color: #575757;
+		width:3.19rem;
+		min-height:0.485rem;
+		line-height:0.485rem;
+		font-size: 0.24rem;
+		color:#fff;
+		border-radius: 0.2rem;
+		background-image: url(../scripts/pageScripts/common/console/images/mobile-dot.png);
+   		background-size: 0.38rem 0.485rem;
+   		background-repeat: no-repeat;
+   		background-position: left;
+   		border-right:0px;
+   		padding-right:0.585rem;
+   		padding-left:0.43rem;
+	}
+	.arrow-console-close{
+	   background-image: url(../scripts/pageScripts/common/console/images/mobile-close.png);
+	   background-size: cover;
+	   height:0.485rem;
+	   width:0.585rem;
+	   position:absolute;
+	   cursor:pointer;
+	   z-index:101;
+	   overflow:hidden;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

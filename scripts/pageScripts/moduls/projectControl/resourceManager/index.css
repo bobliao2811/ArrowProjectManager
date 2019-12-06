@@ -1,0 +1,253 @@
+.rm-button{
+	position: fixed;
+	left:0px;
+	background-color:#009fe6;
+	width:30px;
+	background-image: url(../images/a-botton.png);
+	background-position:center  10px;
+	background-repeat: no-repeat;
+	color:#fff;
+	padding-top: 32px;
+	padding-bottom: 12px;
+	cursor: pointer;
+}
+
+.rm-button p{
+	font-size: 18px;
+	line-height: 19px;
+	text-align: center;
+	cursor: inherit;
+}
+
+.backgroundLayer{
+	display: none;
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.6);
+	z-index: 998;
+}
+
+.rm-panel{
+	display: none;
+	background-color: #efefef;
+	width:480px;
+	overflow: hidden;
+	position: fixed;
+	top:0;
+	left:0;
+	z-index:999;
+}
+
+.outer{
+	overflow:hidden;
+}
+
+.rmp-title{
+	margin: 10px 0px 10px 10px;
+	overflow: hidden;
+}
+
+.rmp-title span,.rmp-title label{
+	float: left;
+	display: inline-block;
+}
+
+.rmp-title label{
+	font-size: 18px;
+	color:#000;
+}
+
+.rmp-title span.button.blue.back{
+	height:28px;
+	line-height:28px;
+	width: auto;
+	font-size: 16px;
+	background-position: 25px center;
+	padding:0px 20px 0px 32px;
+	background-size: 15px 15px;
+	float: right;
+}
+
+.rmp-path{
+	margin: 0px 0px 10px 10px;
+    font-size: 14px;
+    color: #626262;
+    display: block;
+    width: 467px;
+}
+
+.rmp-tree{
+	background-color: #fff;
+	overflow: auto;
+	background-color: #fff;
+	position: relative;
+}
+
+.fs-fileSystemView-inset{
+	width: auto;
+	height:auto;
+	overflow: hidden;
+	position: absolute;
+	display: table;
+}
+
+.fs-tree-title,.fs-t-t-inset{
+	height:37px;
+	width:auto;
+	overflow: hidden;
+	line-height: 37px;
+	font-size: 16px;
+	color:#202020;
+	background-position: 0px center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.fs-tree-title div{
+	cursor: pointer;
+	float: left;
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.fs-tree-title:hover{
+	background-color: #efefef;
+}
+
+.fs-tree-title:action{
+	background-color: #d8d8d8;
+}
+
+
+.fs-t-t-inset{
+	margin-left: 37px;
+}
+
+.fs-tree-childs{
+	background-repeat: repeat-y;
+	background-image:  url(../images/path_4.png);
+	padding-left:37px;
+}
+
+.fs-tree-childs.last{
+	background-image:none;
+}
+
+.fs-tree-icon{
+	height:37px;
+	width:37px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-size: contain;
+	float: left;
+	margin-right:5px;
+}
+
+.fs-tree-icon.main{
+	background-image: url(../images/icon_forder_open.png);
+}
+
+.fs-tree-icon.driver{
+	background-image: url(../images/icon_driver.png);
+	margin-left: 20px;
+}
+
+.fs-tree-icon.forder{
+	background-image: url(../images/icon_forder.png);
+	margin-left: 20px;
+}
+
+.fs-tree-icon.file{
+	background-image: url(../images/icon_file.png);
+	margin-left: 20px;
+}
+
+.fs-tree-icon.forderOpen{
+	background-image: url(../images/icon_forder_open.png);
+	margin-left: 20px;
+}
+
+.fs-tree-title.branch{
+	background-image: url(../images/path_1.png);
+}
+
+.fs-tree-title.last{
+	background-image: url(../images/path_5.png);
+}
+
+
+.fs-t-t-inset.open{
+	background-image: url(../images/path_2.png);
+}
+
+.fs-t-t-inset.close{
+	background-image: url(../images/path_3.png);
+}
+
+.fs-tree-title.selected{
+	background-color: #dde1ff;
+	font-weight: bold;
+}
+
+span.button.blue.newCompoments{
+	display: inline-block;
+    font-size: 12px;
+    float: right;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 10px;
+    width: auto;
+    padding: 0px 10px 0px 10px;
+    border-radius: 10px;
+    margin-top: 3px;
+}
+
+.e-editor{
+	position: fixed;
+	display: none;
+	top:0;
+	height:100%;
+	border:0px;
+	background-color: #454545;
+	z-index: 1000;
+}
+
+
+[data-id=totalPath],
+[data-id=imagePath],
+[data-id=cssPath],
+[data-id=jsPath],
+[data-id=htmlPath]
+{
+	font-size: 12px;
+	font-family: '宋体';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

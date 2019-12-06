@@ -1,0 +1,78 @@
+
+.welcome-description{
+	font-size: 14px;
+	color:#626262;
+	margin-top: 20px;
+	line-height: 19px;
+}
+
+.welcome-settings{
+	clear: fixed;
+	margin-top: 45px;
+}
+
+.welcome-settings .ws-title{
+	font-size: 48px;
+	color:#202020;
+}
+
+.welcome-settings .ws-details{
+	margin-top: 20px;
+	font-size: 14px;
+	color:#626262;
+}
+
+.ws-localPath .textInputBig.forder{
+	background-image: url(../images/forder.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	float: left;
+	display: inline-block;
+}
+
+.ws-localPath .textInputBig.forder input{
+	margin-left: 68px;
+	width:400px;
+}
+
+.ws-localPath{
+	clear:fixed;
+	overflow: auto;
+}
+
+.ws-localPath .button.blue{
+	float: left;
+	display: inline-block;
+	margin-left: 14px;
+	height:66px;
+	line-height: 66px;
+}
+
+..ws-localHost{
+	width:100%;
+}
+.ws-localHost .textInputBig.host{
+	background-image: url(../images/internet.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	float: left;
+	display: inline-block;
+}
+
+.ws-localHost .textInputBig.host input{
+	margin-left: 68px;
+	width:400px;
+}
+
+.ws-localHost{
+	clear:fixed;
+	overflow: auto;
+}
+
+.ws-localHost .button.blue{
+	float: right;
+	display: inline-block;
+	margin-left: 14px;
+	height:66px;
+	line-height: 66px;
+}
