@@ -65,7 +65,7 @@
 				//初始化ajaxproxy
 				window.ac.init(function(){
 					window.ac.ajaxProxy = new _ajaxProxy({});
-					window.ac.ajaxProxy.init(self.common,window);
+					window.ac.ajaxProxy.init(window.ac,window);
 
 					//把arrowBase放到全局中去
 					window.arrowBase = _arrowBase;

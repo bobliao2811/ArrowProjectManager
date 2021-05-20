@@ -100,7 +100,7 @@ define(function () {
         isDoubleBracketsBind: /\{\{(\s|\S)*?\}\}/g,
         //判断是否为脚本绑定
         //只要存在运算符就肯定是脚本绑定
-        isExpression: /\%|\!|\:|\?|\=|\$|\(|\)|\[|\]|\{|\}|\'|\"|\`|\&|\+|\-|\*|\//g,
+        isExpression:/\%|\!|\:|\>|\<|\?|\=|\$|\(|\)|\[|\]|\{|\}|\'|\"|\`|\&|\+|\-|\*|\//g,
         //判断是否为箭头运算符
         isArrowExp: /\-\>/g,
         //判断是否@打头
@@ -719,18 +719,26 @@ define(function () {
           }
         }
 
-        if (self.getTrueFalese(data)) {
-          _htmlNode.show(); //处理else
+        if(self.getTrueFalese(data)){
+          _htmlNode.show();
 
-
-          if (typeof _htmlNode.next().attr('else') !== 'undefined' && _htmlNode.next().attr('else') !== '' || _htmlNode.next().data('else') !== '') {
+          //处理else
+          if(
+              (typeof _htmlNode.next().attr('else') !== 'undefined')
+              ||
+              (typeof _htmlNode.next().data('else') !== 'undefined')
+          ){
             _htmlNode.next().hide();
           }
-        } else {
-          _htmlNode.hide(); //处理else
+        }else{
+          _htmlNode.hide();
 
-
-          if (typeof _htmlNode.next().attr('else') !== 'undefined' && _htmlNode.next().attr('else') !== '' || _htmlNode.next().data('else') !== '') {
+          //处理else
+          if(
+              (typeof _htmlNode.next().attr('else') !== 'undefined')
+              ||
+              (typeof _htmlNode.next().data('else') !== 'undefined')
+          ){
             _htmlNode.next().show();
           }
         }
@@ -825,7 +833,7 @@ define(function () {
         dataStr = dataStr.replace(/self\./g, 'window.___oneTimeEval.self.');
         _exp = _exp.replace(/events\./g, 'window.___oneTimeEval.events.');
         _exp = _exp.replace(/\$el/g, 'window.___oneTimeEval.el');
-        var newExp = dataStr += _exp + ';';
+        var newExp = dataStr += "(function(){ return "+_exp+' ;})();';
         var result = eval(newExp);
 
         try {
@@ -853,7 +861,7 @@ define(function () {
         window["___oneTimeEval"]["events"] = this.eventsList;
         dataStr = dataStr.replace(/self\./g, 'window.___oneTimeEval.self.');
         _exp = _exp.replace(/events\./g, 'window.___oneTimeEval.events.');
-        var newExp = dataStr += _exp + ';';
+        var newExp = dataStr += "(function(){ return "+_exp+' ;})();';
         var result = eval(newExp);
 
         try {
@@ -960,7 +968,16 @@ define(function () {
           } //如果不是箭头表达式就直接赋予运算结果
 
 
-          _htmlNode.css(result.expResult.result.key, result.expResult.result.value);
+          if(typeof result.expResult.result.key === 'undefined' || result.expResult.result.key === ''){
+            if(typeof result.expResult.result.value === 'undefined' && typeof result.expResult.result === 'string'){
+              _htmlNode.attr('style',result.expResult.result);
+            }else{
+              _htmlNode.attr('style',result.expResult.result.value);
+            }
+          }else{
+            //如果不是箭头表达式就直接赋予运算结果
+            _htmlNode.css(result.expResult.result.key,result.expResult.result.value);
+          }
 
           _htmlNode.stylePreResult = result.expResult.result;
         }
@@ -1383,29 +1400,46 @@ define(function () {
     }, {
       key: "start",
       value: function start() {
-        var self = this; //如果监听代理存在，就使用监听代理进行监听
+        var self = this;
+        //如果监听代理存在，就使用监听代理进行监听
+        if(typeof Proxy !== 'undefined'){
 
-        if (typeof Proxy !== 'undefined') {
-          this.data = new Proxy(this.data, {
-            get: function get(target, key, receiver) {
-              return Reflect.get(target, key, receiver);
-            },
-            set: function set(target, key, value, receiver) {
-              var r = Reflect.set(target, key, value, receiver);
-              self.update();
-              return r;
+          //深层监听
+          var Proxxy = function(_data){
+
+            for(var i in _data ){
+              var item = _data[i];
+              if(typeof item === 'object' && item !== null){
+                _data[i] = Proxxy(item);
+              }
+
+              if(typeof item === 'array' && item !== null){
+                _data[i] = Proxxy(item);
+              }
             }
-          });
-        } else {
+
+            _data = new Proxy(_data, {
+              get: function(target, key, receiver) {
+                return Reflect.get(target, key, receiver);
+              },
+              set: function(target, key, value, receiver) {
+                var r = Reflect.set(target, key, value, receiver);
+                self.update();
+                return r;
+              },
+            });
+            return _data;
+          }
+          this.data = Proxxy(this.data);
+
+        }else{
           //否则启动脏检测
           var self = this;
-          this.listener = window.ArrowMvvmListener.regTimer(function () {
+          this.listener = window.ArrowMvvmListener.regTimer(function(){
             self.update();
           });
           var self = this;
         }
-      } //停止监听
-
     }, {
       key: "stop",
       value: function stop() {

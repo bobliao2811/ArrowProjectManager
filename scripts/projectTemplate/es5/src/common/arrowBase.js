@@ -206,7 +206,7 @@ define('arrowBase',['/common/mvvm.js','/common/switch.js'],function(_mvvm,_switc
 			if(_html !== ''){
 				self.html = $(_html);
 				var dataContainer = '';
-				for(var i in self.html){
+				for(var i=0;i<self.html.length;i++){
 					if($(self.html[i]).attr('data-container')){
 						dataContainer = $(self.html[i]).attr('data-container');
 						break;
@@ -251,7 +251,6 @@ define('arrowBase',['/common/mvvm.js','/common/switch.js'],function(_mvvm,_switc
 			if(typeof _callBack !== 'undefined'){
 				_callBack(self.css,self.html);
 			};
-			}
 		});
 	}
 

@@ -153,7 +153,7 @@ define(function(){
 		//创建ajax错误
 		self.makeError = function(xmlHr,msg,obj,params){
 		     //如果使用调试码开启了调试模式
-		    if(window.baseConfig.runTimeMode !== 'release'){
+			if(window.arrowConfig.mode !== 'rel'){
 		        console.log(msg);
 		        self.common.console.write(msg);
 		        if(params.error){

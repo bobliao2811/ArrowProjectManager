@@ -72,10 +72,13 @@
 	<!--绑定attr-->
 	<div attr-bind='(aaa===0)->(text:disabled)' attr-bind='someFunction()' ></div>
 	<div :attr='(aaa===0)->(text:disabled)' :attr='someFunction()' ></div>
+	<div :attr='{key:"prop",value:"val"}' :attr='someFunction()' ></div>
 
 	<!--绑定style-->
 	<div style-bind='(aaa===0)->(background-color:#454545)' style-bind='someFunction()' ></div>
 	<div :style='(aaa===0)->(background-color:#454545)' :style='someFunction()' ></div>
+	<div :style='"font-size:"+value+"px"' :style='someFunction()' ></div>
+	<div :style='{key:"prop",value:val+"px"}' :style='someFunction()' ></div>
 
 	<div f-bind='if(list.length === 0){el.html("保安傻逼")}else{el.html("还是傻逼")}' ></div>
 

@@ -87,7 +87,7 @@ class mvvm{
 			isDoubleBracketsBind:/\{\{(\s|\S)*?\}\}/g,
 			//判断是否为脚本绑定
 			//只要存在运算符就肯定是脚本绑定
-			isExpression:/\%|\!|\:|\?|\=|\$|\(|\)|\[|\]|\{|\}|\'|\"|\`|\&|\+|\-|\*|\//g,
+			isExpression:/\%|\!|\:|\>|\<|\?|\=|\$|\(|\)|\[|\]|\{|\}|\'|\"|\`|\&|\+|\-|\*|\//g,
 			//判断是否为箭头运算符
 			isArrowExp:/\-\>/g,
 			//判断是否@打头
@@ -110,7 +110,7 @@ class mvvm{
 					stopTimer:null,
 				}
 				AWL = window.ArrowMvvmListener;
-			
+
 				AWL.timerList = [];
 				AWL.startTimmer = function(){
 					var setTimmer = function(){
@@ -259,7 +259,7 @@ class mvvm{
 		}
 	}
 
-	
+
 
 	//执行class-bind，attr-bind，style-bind三绑定
 	bindCAS(_html){
@@ -488,7 +488,7 @@ class mvvm{
 						if(!isExp.isExp){
 							//添加数据监视
 							this.addListenerInList('text:'+dataTag,$(child),sourceTextCommand);
-							
+
 						}else{
 							//否则就要添加多个变量监听
 							for(var e=0;e<isExp.dataTagList.length;e++){
@@ -532,7 +532,7 @@ class mvvm{
 			(typeof _html.attr('if') !==  'undefined'  && _html.attr('for') !== '')
 			&&
 			(typeof _html.attr('for') === 'undefined' || _html.attr('for') === '')
-			){
+		){
 			newNodes.push(_html);
 		}
 		ifNodes = $(newNodes);
@@ -587,7 +587,7 @@ class mvvm{
 			(typeof _html.attr('f-bind') !==  'undefined'  && _html.attr('for') !== '')
 			&&
 			(typeof _html.attr('for') === 'undefined' || _html.attr('for') === '')
-			){
+		){
 			newNodes.push(_html);
 		}
 		fNodes = $(newNodes);
@@ -665,10 +665,10 @@ class mvvm{
 
 			//处理else
 			if(
-				(typeof _htmlNode.next().attr('else') !== 'undefined' &&  _htmlNode.next().attr('else') !== '')
+				(typeof _htmlNode.next().attr('else') !== 'undefined')
 				||
-				(_htmlNode.next().data('else') !== '')
-				){
+				(typeof _htmlNode.next().data('else') !== 'undefined')
+			){
 				_htmlNode.next().hide();
 			}
 		}else{
@@ -676,10 +676,10 @@ class mvvm{
 
 			//处理else
 			if(
-				(typeof _htmlNode.next().attr('else') !== 'undefined' &&  _htmlNode.next().attr('else') !== '')
+				(typeof _htmlNode.next().attr('else') !== 'undefined')
 				||
-				(_htmlNode.next().data('else') !== '')
-				){
+				(typeof _htmlNode.next().data('else') !== 'undefined')
+			){
 				_htmlNode.next().show();
 			}
 		}
@@ -768,7 +768,7 @@ class mvvm{
 		dataStr = dataStr.replace(/self\./g,'window.___oneTimeEval.self.');
 		_exp = _exp.replace(/events\./g,'window.___oneTimeEval.events.');
 		_exp = _exp.replace(/\$el/g,'window.___oneTimeEval.el');
-		var newExp = dataStr += _exp+';';
+		var newExp = dataStr += "(function(){ return "+_exp+' ;})();';
 		var result = eval(newExp);
 		try{delete window["___oneTimeEval"];}catch(_e){}
 		return result;
@@ -789,7 +789,7 @@ class mvvm{
 		window["___oneTimeEval"]["events"] = this.eventsList;
 		dataStr = dataStr.replace(/self\./g,'window.___oneTimeEval.self.');
 		_exp = _exp.replace(/events\./g,'window.___oneTimeEval.events.');
-		var newExp = dataStr += _exp+';';
+		var newExp = dataStr += "(function(){ return "+_exp+' ;})();';
 		var result = eval(newExp);
 		try{delete window["___oneTimeEval"];}catch(_e){}
 		return result;
@@ -876,8 +876,17 @@ class mvvm{
 			if(typeof _htmlNode.stylePreResult !=='undefined'){
 				_htmlNode.css(_htmlNode.stylePreResult.key,'');
 			}
-			//如果不是箭头表达式就直接赋予运算结果
-			_htmlNode.css(result.expResult.result.key,result.expResult.result.value);
+
+			if(typeof result.expResult.result.key === 'undefined' || result.expResult.result.key === ''){
+				if(typeof result.expResult.result.value === 'undefined' && typeof result.expResult.result === 'string'){
+					_htmlNode.attr('style',result.expResult.result);
+				}else{
+					_htmlNode.attr('style',result.expResult.result.value);
+				}
+			}else{
+				//如果不是箭头表达式就直接赋予运算结果
+				_htmlNode.css(result.expResult.result.key,result.expResult.result.value);
+			}
 			_htmlNode.stylePreResult = result.expResult.result;
 		}
 	}
@@ -922,7 +931,7 @@ class mvvm{
 					_htmlNode[0][bTag] = ssString = sourceTextCommand.replace(bindNodes[j],data);
 				}
 			}
-			
+
 
 		}
 	}
@@ -993,39 +1002,39 @@ class mvvm{
 			var value = _htmlNode.val();
 			var gValue = self.get(dataTag);
 			//判断checkbox
-			if(_htmlNode[0].tagName === 'INPUT' && 
+			if(_htmlNode[0].tagName === 'INPUT' &&
 				typeof _htmlNode.attr('type') !== 'undefined' && _htmlNode.attr('type') !== '' &&
 				_htmlNode.attr('type') === 'checkbox'){
 				//处理checkbox
 				switch(gValue){
 					case '1':
 						value = '0';
-					break;
+						break;
 					case '0':
 						value = '1';
-					break;
+						break;
 					case 1:
 						value = 0;
-					break;
+						break;
 					case 0:
 						value = 1;
-					break;
+						break;
 					case true:
 						value = false;
-					break;
+						break;
 					case false:
 						value = true;
-					break;
+						break;
 					case 'true':
 						value = 'false';
-					break;
+						break;
 					case 'false':
 						value = 'true';
-					break;
+						break;
 				}
 			}else if(_htmlNode[0].tagName === 'SELECT'){
 				console.log(value+'检测到更改');
-				
+
 			}
 
 			if(value !== gValue){
@@ -1037,37 +1046,37 @@ class mvvm{
 		}
 
 		//判断checkbox
-		if(_htmlNode[0].tagName === 'INPUT' && 
+		if(_htmlNode[0].tagName === 'INPUT' &&
 			typeof _htmlNode.attr('type') !== 'undefined' && _htmlNode.attr('type') !== '' &&
 			_htmlNode.attr('type') === 'checkbox'){
-			
+
 			//处理checkbox
 			var vData = false;
 			switch(data){
 				case '1':
 					vData = true;
-				break;
+					break;
 				case '0':
 					vData = false;
-				break;
+					break;
 				case 1:
 					vData = true;
-				break;
+					break;
 				case 0:
 					vData = false;
-				break;
+					break;
 				case true:
 					vData = true;
-				break;
+					break;
 				case false:
 					vData = false;
-				break;
+					break;
 				case 'true':
 					vData = true;
-				break;
+					break;
 				case 'false':
 					vData = false;
-				break;
+					break;
 			}
 			if(vData){
 				_htmlNode.attr('checked','checked');
@@ -1081,7 +1090,7 @@ class mvvm{
 				_htmlNode.bind('click',bindValForinput);
 				_htmlNode.data('data-is-bind-mvvm-event',true)
 			}
-			
+
 		}else if(_htmlNode[0].tagName === 'SELECT'){
 			_htmlNode.val(data);
 			//绑定过更改事件就不要重复绑定了
@@ -1089,11 +1098,11 @@ class mvvm{
 				_htmlNode.bind('change',bindValForinput);
 				_htmlNode.data('data-is-bind-mvvm-event',true)
 			}
-			
+
 		}else{
 			_htmlNode.val(data);
 			//绑定过更改事件就不要重复绑定了
-			if(typeof _htmlNode.data('data-is-bind-mvvm-event') === 'undefined'){	
+			if(typeof _htmlNode.data('data-is-bind-mvvm-event') === 'undefined'){
 				_htmlNode.unbind('keyup',bindValForinput);
 				_htmlNode.unbind('blur',bindValForinput);
 				_htmlNode.keyup(bindValForinput);
@@ -1105,7 +1114,7 @@ class mvvm{
 	}
 
 	//获得对照数据集的数据
-	getFromComp(_dataTag){ 
+	getFromComp(_dataTag){
 		var self = this;
 		var getData = function(){
 			if(_dataTag.indexOf('.') !== -1){
@@ -1194,7 +1203,7 @@ class mvvm{
 						_data[_dArr[layer]] = '';
 					}
 				}
-				
+
 				var l = _data[_dArr[layer]];
 				var c = _compData[_dArr[layer]];
 
@@ -1244,16 +1253,35 @@ class mvvm{
 		var self = this;
 		//如果监听代理存在，就使用监听代理进行监听
 		if(typeof Proxy !== 'undefined'){
-			this.data = new Proxy(this.data, {
-			  get: function(target, key, receiver) {
-			    return Reflect.get(target, key, receiver);
-			  },
-			  set: function(target, key, value, receiver) {
-			  	var r = Reflect.set(target, key, value, receiver);
-			  	self.update();
-			    return r;
-			  },
-			});
+
+			//深层监听
+			var Proxxy = function(_data){
+
+				for(var i in _data ){
+					var item = _data[i];
+					if(typeof item === 'object' && item !== null){
+						_data[i] = Proxxy(item);
+					}
+
+					if(typeof item === 'array' && item !== null){
+						_data[i] = Proxxy(item);
+					}
+				}
+
+				_data = new Proxy(_data, {
+					get: function(target, key, receiver) {
+						return Reflect.get(target, key, receiver);
+					},
+					set: function(target, key, value, receiver) {
+						var r = Reflect.set(target, key, value, receiver);
+						self.update();
+						return r;
+					},
+				});
+				return _data;
+			}
+			this.data = Proxxy(this.data);
+
 		}else{
 			//否则启动脏检测
 			var self = this;
@@ -1262,7 +1290,7 @@ class mvvm{
 			});
 			var self = this;
 		}
-		
+
 	}
 
 	//停止监听
@@ -1376,7 +1404,7 @@ class mvvm{
 		}else{
 			replaceableNodes.remove();
 		}
-		
+
 		htmlObject[0].forChildList = [];
 
 		var forMvvmList = [];
@@ -1419,7 +1447,7 @@ class mvvm{
 				};
 				_fmv.isForItem = true;
 			})(fmv,this)
-			
+
 			fmv.init();
 			forMvvmList.push(fmv);
 			fmv.htmlObject.data('currentData',di);
@@ -1576,13 +1604,13 @@ class mvvm{
 				for(var j in self.listenList[i]){
 					var lli = self.listenList[i][j].html;
 					var desi = self.listenList[i][j].desc;
-					
+
 					//变更绑定了一样数据的
 					//判断html对象不一样的,绑定数据相等的可以执行
 					//或者
 					//判断命令不相等，但是html节点一样的，绑定数据相等的可以执行
-					if((lli !== _htmlNode ) 
-						|| (_command !== command && lli === _htmlNode) 
+					if((lli !== _htmlNode )
+						|| (_command !== command && lli === _htmlNode)
 						|| (_command === command && lli !== _htmlNode) ){
 						this.explainDataBindCommand(i,lli,desi);
 					}
@@ -1622,19 +1650,19 @@ class mvvm{
 					//联动更新
 					this.checkDataAndUpdate(dataTag,value,lli,i);
 				}
-				
+
 			}
 		}
 	}
 
 	//获得一个gui ID
 	newGuid(){
-	    var guid = "";
-	    for (var i = 1; i <= 32; i++) {
-	        var n = Math.floor(Math.random() * 16.0).toString(16);
-	        guid += n;
-	    }
-	    return guid;
+		var guid = "";
+		for (var i = 1; i <= 32; i++) {
+			var n = Math.floor(Math.random() * 16.0).toString(16);
+			guid += n;
+		}
+		return guid;
 	};
 
 	//获得真假
@@ -1643,28 +1671,28 @@ class mvvm{
 		switch(_value){
 			case '1':
 				return true;
-			break;
+				break;
 			case '0':
 				return false;
-			break;
+				break;
 			case 1:
 				return true;
-			break;
+				break;
 			case 0:
 				return false;
-			break;
+				break;
 			case true:
 				return true;
-			break;
+				break;
 			case false:
 				return false;
-			break;
+				break;
 			case 'true':
 				return true;
-			break;
+				break;
 			case 'false':
 				return false;
-			break;
+				break;
 		}
 		return false;
 	}

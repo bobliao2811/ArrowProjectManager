@@ -674,6 +674,14 @@ define(['scripts/pageScripts/moduls/projectControl/releaseManager/index.css','sc
 	 		this.html.find('[data-id=CDNImageHost]').val(this.currentSetting.imagesSettings.CDNImageHost);
 	 		this.html.find('[data-id=usingTinifyKey]').val(this.currentSetting.imagesSettings.usingTinifyKey);
 
+	 		//如果是自定义配置，就可以更改发步的目标物理路径
+	 		if(_ssItem.data.unDeleteable === false){
+				this.html.find('[data-id=toPath]').removeAttr('readonly');
+			}else{
+	 			//否则不能更改
+				this.html.find('[data-id=toPath]').attr('readonly','readonly');
+			}
+
 
 	 		
 	 		if(_ssItem.data.imagesSettings.CDNImagesHandle === true){
