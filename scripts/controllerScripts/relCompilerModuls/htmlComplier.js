@@ -111,7 +111,9 @@ const urlCompiler = function(_config,_parent){
 	this.handelHtml = function(){
 		for(var i=0;i<this.parent.fileMap.entryPages.arr.length;i++){
 			var fi = this.parent.fileMap.entryPages.arr[i];
-			fi.relData =  self.packer.minify(fi.relData).replace(/\<\!\-\-(\s|\S)*?\-\-\>/g,'').replace(/\/\*(\s|\S)*?\*\//g,'');
+			if(fi.relData.indexOf('<!--ArrowCommand:DoNotTouch-->') === -1){
+				fi.relData =  self.packer.minify(fi.relData).replace(/\<\!\-\-(\s|\S)*?\-\-\>/g,'').replace(/\/\*(\s|\S)*?\*\//g,'');
+			}
 		}
 	}
 }

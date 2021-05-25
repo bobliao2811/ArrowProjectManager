@@ -138,11 +138,18 @@ fileNameComplier = function (_config, _parent) {
 					var finalUrl = '';
 					for (var j = 0; j < urlArr.length; j++) {
 						var ui = urlArr[j];
-						var suffix = ui.split('.')[1];
+						var suffix = ui.split('.')[ui.split('.').length - 1];
+						if(ui.split('.').length === 1){
+							suffix = undefined;
+						}
 
 						if (ui !== '') {
 							if (j === urlArr.length - 1) {
-								ui = ui.split('.')[0];
+								var namme = '';
+								for (var kn = 0; kn < ui.split('.').length - 1; kn++) {
+									namme += ui.split('.')[kn];
+								}
+								ui = namme;
 							}
 							finalUrl += '/' + self.fileNameEncrypt(ui, self.fileAesKey, self.fileAesvi);
 							if (j === urlArr.length - 1) {
@@ -168,10 +175,17 @@ fileNameComplier = function (_config, _parent) {
 				var finalPath = '';
 				for (var j = 0; j < pathArr.length; j++) {
 					var pi = pathArr[j];
-					var suffix = pi.split('.')[1];
+					var suffix = pi.split('.')[pi.split('.').length - 1];
+					if(pi.split('.').length === 1){
+						suffix = undefined;
+					}
 					if (pi !== '') {
 						if (j === pathArr.length - 1) {
-							pi = pi.split('.')[0];
+							var namme = '';
+							for (var kn = 0; kn < pi.split('.').length - 1; kn++) {
+								namme += pi.split('.')[kn];
+							}
+							pi = namme;
 						}
 						finalPath += '\\' + self.fileNameEncrypt(pi, self.fileAesKey, self.fileAesvi);
 						if (j === pathArr.length - 1 && typeof suffix !== 'undefined') {
@@ -186,10 +200,17 @@ fileNameComplier = function (_config, _parent) {
 				var finalHost = '';
 				for (var j = 0; j < hostArr.length; j++) {
 					var hi = hostArr[j];
-					var suffix = hi.split('.')[1];
+					var suffix = hi.split('.')[hi.split('.').length - 1];
+					if(hi.split('.').length === 1){
+						suffix = undefined;
+					}
 					if (hi !== '') {
 						if (j === hostArr.length - 1) {
-							hi = hi.split('.')[0];
+							var namme = '';
+							for (var kn = 0; kn < hi.split('.').length - 1; kn++) {
+								namme += hi.split('.')[kn];
+							}
+							hi = namme;
 						}
 						finalHost += '/' + self.fileNameEncrypt(hi, self.fileAesKey, self.fileAesvi);
 						if (j === hostArr.length - 1 && typeof suffix !== 'undefined') {

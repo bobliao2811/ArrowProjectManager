@@ -169,6 +169,7 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                     shape = 'last';
                     isLast = true;
                 }
+
                 if(!fItem.isForder){
                     fIcon = 'file';
                 }
@@ -192,8 +193,14 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                     isForder:fItem.isForder,
                     children:[]
                 }
+
+                if(/^\\src/.test(fNode.pPath) && fNode.isForder){
+                    fNode.elem.find('.fs-tree-icon').removeClass('forder');
+                    fNode.elem.find('.fs-tree-icon').addClass('forder-src');
+                }
+
                 //如果是\src\compoments 下的文件夹都可以添加组件
-                if(/^\\src\\compoments/.test(fNode.pPath) && fNode.name !== 'images' && fNode.isForder === true){
+                if((/^\\src\\compoments/.test(fNode.pPath) || /^\\src\\common/.test(fNode.pPath) ) && fNode.name !== 'images' && fNode.isForder === true){
                     elem.append('<span class="button blue newCompoments" d-d="drDownMenu" >..</span>');
                 }
 
@@ -219,6 +226,22 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                                 }},
                                 {name:'在系统中打开文件夹',call:function(){
                                     ac.runMainFunc('wsm','openForderFromExplorer',{path:_fNode.path},function(_result){});
+                                }},
+                                {name:'批设置Do-not-touch',call:function(){
+                                    ac.ask('确定给文件夹“'+_fNode.name+'”内所有代码设置Do-not-touch? (Do-not-touch 意为在文件内注释中打上" < ! - -ArrowCommand:DoNotTouch - - >"标签，则该文件将不会被发布时编译器所触碰。该选项用于一些不兼容本框架代码压缩方案的第三方组件。)',function(){
+                                        //ac.runMainFunc('wsm','openForderFromExplorer',{path:_fNode.path},function(_result){});
+                                        self.addDNTTagToAllFile(_fNode);
+                                    },function(){
+
+                                    });
+                                }},
+                                {name:'批取消Do-not-touch',call:function(){
+                                    ac.ask('确定给文件夹“'+_fNode.name+'”内所有代码去除Do-not-touch标签?',function(){
+                                        //ac.runMainFunc('wsm','openForderFromExplorer',{path:_fNode.path},function(_result){});
+                                        self.removeDNTTagToAllFile(_fNode);
+                                    },function(){
+                                        
+                                    });
                                 }}
                             ],{x:mControl.nowPosition.x,y:mControl.nowPosition.y},true,function(){});
                     });
@@ -233,8 +256,13 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                                 _fNode.childrenNode.hide(); 
                                 _fNode.elem.find('.fs-t-t-inset').removeClass('open');
                                 _fNode.elem.find('.fs-t-t-inset').addClass('close');
-                                _fNode.elem.find('.fs-tree-icon').removeClass('forderOpen');
-                                _fNode.elem.find('.fs-tree-icon').addClass('forder');
+                                if(/^\\src/.test(_fNode.pPath) && _fNode.isForder){
+                                    _fNode.elem.find('.fs-tree-icon').removeClass('forderOpen-src');
+                                    _fNode.elem.find('.fs-tree-icon').addClass('forder-src');
+                                }else{
+                                    _fNode.elem.find('.fs-tree-icon').removeClass('forderOpen');
+                                    _fNode.elem.find('.fs-tree-icon').addClass('forder');
+                                }
                                 _fNode.isOpen = false;
                             }else{
                                 if(_fNode.childrenNode === null){
@@ -244,8 +272,13 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                                 }
                                 _fNode.elem.find('.fs-t-t-inset').removeClass('close');
                                 _fNode.elem.find('.fs-t-t-inset').addClass('open');
-                                _fNode.elem.find('.fs-tree-icon').removeClass('forder');
-                                _fNode.elem.find('.fs-tree-icon').addClass('forderOpen');
+                                if(/^\\src/.test(_fNode.pPath) && _fNode.isForder){
+                                    _fNode.elem.find('.fs-tree-icon').removeClass('forder-src');
+                                    _fNode.elem.find('.fs-tree-icon').addClass('forderOpen-src');
+                                }else{
+                                    _fNode.elem.find('.fs-tree-icon').removeClass('forder');
+                                    _fNode.elem.find('.fs-tree-icon').addClass('forderOpen');
+                                }
                                 _fNode.isOpen = true;
                             }
                             self.html.find('[data-id=editor]').hide();
@@ -256,6 +289,86 @@ define(['scripts/pageScripts/moduls/projectControl/resourceManager/index.css','s
                 })(fNode);
             }
             return container;
+        }
+
+        //直接触达文件夹下所有文件的函数
+        this.reachEveryFileInForder = function(_fNode,_operationCall){
+            var fList = self.fs.readdirSync(_fNode.path+ "\\");
+            var itemList = [];
+            for(var i=0;i<fList.length;i++){
+                fItem = fList[i];
+                var isf = false;
+                try{
+                    isf = self.fs.lstatSync(_fNode.path + "\\"+fItem).isDirectory();
+                }catch(e){};
+                if(isf){
+                   itemList.push({item:fItem,isForder:true});
+                }else{
+                    itemList.push({item:fItem,isForder:false});
+                }
+            }
+            for(var i=0;i<itemList.length;i++){
+                var fItem = itemList[i];
+                var fNode = {
+                    name:fItem.item,
+                    path:_fNode.path+'\\'+fItem.item,
+                    pPath:_fNode.pPath+'\\'+fItem.item,
+                    isForder:fItem.isForder,
+                }
+                if(fNode.isForder){
+                    self.reachEveryFileInForder(fNode,_operationCall);
+                }else{
+                    var suffixName = fNode.name.split('.')[fNode.name.split('.').length - 1];
+                    if(fNode.name.split('.').length === 1){
+                        suffixName = undefined;
+                    }
+                    _operationCall(fNode,suffixName);
+                }
+            }
+        }
+
+        //给某文件夹下所有文件打上<!--ArrowCommand:DoNotTouch-->标签
+        this.addDNTTagToAllFile = function(_fNode){
+            this.reachEveryFileInForder(_fNode,function(_fNode,_suffixName){
+                if(_suffixName === 'js'){
+                    var content = self.fs.readFileSync(_fNode.path,"utf-8");
+                    if(content.indexOf('<!--ArrowCommand:DoNotTouch-->') === -1){
+                        content = '//<!--ArrowCommand:DoNotTouch-->\n\n' + content;
+                        self.fs.writeFileSync(_fNode.path,content);
+                    }
+                }
+
+                if(_suffixName === 'html' || _suffixName === 'htm' || _suffixName === 'aspx' ){
+                    var content = self.fs.readFileSync(_fNode.path,"utf-8");
+                    if(content.indexOf('<!--ArrowCommand:DoNotTouch-->') === -1){
+                        content = content + '\n\n<!--ArrowCommand:DoNotTouch-->';
+                        self.fs.writeFileSync(_fNode.path,content);
+                    }
+                }
+               
+            });
+        }
+
+         //给某文件夹下所有文件去除<!--ArrowCommand:DoNotTouch-->标签
+        this.removeDNTTagToAllFile = function(_fNode){
+            this.reachEveryFileInForder(_fNode,function(_fNode,_suffixName){
+                if(_suffixName === 'js'){
+                    var content = self.fs.readFileSync(_fNode.path,"utf-8");
+                    if(content.indexOf('<!--ArrowCommand:DoNotTouch-->') !== -1){
+                        content = content.replace(/\/\/\<\!\-\-ArrowCommand\:DoNotTouch\-\-\>/g,'');
+                        self.fs.writeFileSync(_fNode.path,content);
+                    }
+                }
+
+                if(_suffixName === 'html' || _suffixName === 'htm' || _suffixName === 'aspx' ){
+                    var content = self.fs.readFileSync(_fNode.path,"utf-8");
+                    if(content.indexOf('<!--ArrowCommand:DoNotTouch-->') !== -1){
+                        content = content.replace(/\<\!\-\-ArrowCommand\:DoNotTouch\-\-\>/g,'');
+                        self.fs.writeFileSync(_fNode.path,content);
+                    }
+                }
+               
+            });
         }
 
         //增加新的文件夹

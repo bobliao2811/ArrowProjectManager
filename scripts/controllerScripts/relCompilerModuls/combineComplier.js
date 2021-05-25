@@ -417,7 +417,12 @@ const combineComplier = function(_config,_parent){
 				catchStr += 'window.arrowExpressjs.makeCatch(["'+ module.html.relativeHost.replace('/','') +'","'+ module.html.rel.host +'"],"'+  module.html.relData.replace(/"/g,'\\"').replace(/(\n|\t|\r|\x0b|\x0c|\x85|\u2028|\u2029)/g,'') +'");\n\n';
 
 				//是否进行过common的css合并
-				if(this.currentConfig.cssSettings.combineCssesToCommonCss === false){
+				if(
+					//首先确保没有设置将css打包到commoncss里去
+					this.currentConfig.cssSettings.combineCssesToCommonCss === false 
+					//然后确保这个css真实存在在文件系统内，否则就不存在合并这个模块的css这件事情
+					&& typeof(self.parent.fileMap.HostHashList[fi.relativeHost.replace('js','css')]) !=='undefined'
+					){
 					module.css = self.parent.fileMap.HostHashList[fi.relativeHost.replace('js','css')];
 					catchStr += 'window.arrowExpressjs.makeCatch(["'+ module.css.relativeHost.replace('/','') +'","'+ module.css.rel.host +'"],"'+  this.lCSSCoder.pack(module.css.relData.replace(/"/g,'\\"')) +'");\n\n';
 				}

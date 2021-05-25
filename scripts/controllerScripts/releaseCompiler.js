@@ -296,8 +296,14 @@ const releaseCompiler = function(_window,_app,_projectConfig){
 			}else{
 				//拷贝文件
 				anilys.forderCount ++;
-				listItem.name = dItem.split('.')[0];
-				listItem.suffixName = dItem.split('.')[1];
+				//获得文件真实的名称
+				var name = '';
+				for (var j = 0; j < dItem.split('.').length - 1; j++) {
+					name += dItem.split('.')[j];
+				}
+				listItem.name = name;
+				//获得后缀名
+				listItem.suffixName = dItem.split('.')[dItem.split('.').length - 1];
 				if(self.getIsTextCodeFile(listItem.suffixName)){
 					//如果是具体的代码文件就用utf-8的方式载入
 						listItem.srcData = self.fs.readFileSync(_fromDir + "\\"+dItem,'utf-8');
@@ -326,8 +332,24 @@ const releaseCompiler = function(_window,_app,_projectConfig){
 				if(_node.isDeleted !== true){
 					//如果是文件夹就制造文件夹，并深入下去进行发布操作
 					if(!self.fs.existsSync(_node.rel.path)){
-						//不存在就创建
-						self.fs.mkdirSync(_node.rel.path,'0777');
+						var mDir = function(_path){
+							//不存在就创建
+							try{
+								self.fs.mkdirSync(_path,'0777');
+							}catch(_e){
+								var vp = '';
+								var plll = _path.split('\\');
+								for(var kn = 0;kn<plll.length-1;kn++){
+									if(vp !== ''){
+										vp += '\\';
+									}
+									vp +=  plll[kn];
+								}
+								mDir(vp);
+								self.fs.mkdirSync(_path,'0777');
+							}
+						}
+						mDir(_node.rel.path);
 					}
 					for(var i=0;i<_node.children.length;i++){
 						writeFiles(_node.children[i]);

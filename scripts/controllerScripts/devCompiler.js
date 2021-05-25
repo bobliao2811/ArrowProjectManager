@@ -222,7 +222,7 @@ const developmentCompiler = function(_window,_app,_projectConfig){
 	this.handleSingleFile = function(fi,_fromDir,_toDir,_callBack){
 		(function(fi,_fromDir,_toDir,_callBack){
 				var data='';
-				var type= fi.split('.')[1];
+				var type= fi.split('.')[fi.split('.').length - 1];
 				//只对js json less css html htm 进行操作
 				//如果不是这些文件就不用utf-8读取
 				if(type !== 'css' 
@@ -334,9 +334,9 @@ const developmentCompiler = function(_window,_app,_projectConfig){
 				},
 				//失败
 				function(_message){
-					_data+='\n\n***************该文件编译错误::begin********************\n';
-					_data+=_message;
-					_data+='\n***************该文件编译错误::end********************\n\n';
+					_data+='\n\n//***************该文件编译错误::begin********************\n';
+					_data+='//'+_message;
+					_data+='\n//***************该文件编译错误::end********************\n\n';
 					//编译失败就直接跳过此文件不继续进行下面的编译了
 					self.sendCompliMessage(2,"("+  self.dcModuls[_i].name +")文件编译错误:\n文件:"+_urlArgs.currentFilePath.replace(/\\/g,'/')+"\n错误消息:"+_message+'，此次编译已结束!请查找问题并修改故障源码后保存，编译器将再次编译此文件!');
 					_callBack(_data);

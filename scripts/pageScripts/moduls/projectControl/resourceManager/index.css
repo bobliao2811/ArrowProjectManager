@@ -160,6 +160,11 @@
 	margin-left: 20px;
 }
 
+.fs-tree-icon.forder-src{
+	background-image: url(../images/icon_forder_src.png);
+	margin-left: 20px;
+}
+
 .fs-tree-icon.file{
 	background-image: url(../images/icon_file.png);
 	margin-left: 20px;
@@ -167,6 +172,11 @@
 
 .fs-tree-icon.forderOpen{
 	background-image: url(../images/icon_forder_open.png);
+	margin-left: 20px;
+}
+
+.fs-tree-icon.forderOpen-src{
+	background-image: url(../images/icon_forder_src_open.png);
 	margin-left: 20px;
 }
 
