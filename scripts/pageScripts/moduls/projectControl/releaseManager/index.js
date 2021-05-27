@@ -116,7 +116,8 @@ define(['scripts/pageScripts/moduls/projectControl/releaseManager/index.css','sc
 	 					self.currentSetting.combineSettings.combineHtmlAndCssToMainOfModul = true;
 	 					self.html.find('[data-settings=combineSettings_combineHtmlAndCssToMainOfModul]').addClass('selected');
 
-	 				
+	 					self.currentSetting.javaScriptSettings.AESEncryption = false;
+	 					self.html.find('[data-settings=javaScriptSettings_AESEncryption]').removeClass('selected');
 	 				}
 
 	 			
@@ -146,6 +147,9 @@ define(['scripts/pageScripts/moduls/projectControl/releaseManager/index.css','sc
 	 				if(settingName === 'javaScriptSettings_AESEncryption'){
 	 					self.currentSetting.javaScriptSettings.compress = true;
 	 					self.html.find('[data-settings=javaScriptSettings_compress]').addClass('selected');
+
+	 					self.currentSetting.combineSettings.execCatchModulToEntryPage = false;
+	 					self.html.find('[data-settings=combineSettings_execCatchModulToEntryPage]').removeClass('selected');
 	 				}
 
 	 				//勾上全局雪碧图，分模块雪碧图就要购销
