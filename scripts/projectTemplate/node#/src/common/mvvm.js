@@ -789,7 +789,7 @@ class mvvm{
 		window["___oneTimeEval"]["events"] = this.eventsList;
 		dataStr = dataStr.replace(/self\./g,'window.___oneTimeEval.self.');
 		_exp = _exp.replace(/events\./g,'window.___oneTimeEval.events.');
-		var newExp = dataStr += "(function(){ return "+_exp+' ;})();';
+		var newExp = dataStr += "(function(){ return "+_exp+' ; })();';
 		var result = eval(newExp);
 		try{delete window["___oneTimeEval"];}catch(_e){}
 		return result;
@@ -1273,6 +1273,15 @@ class mvvm{
 						return Reflect.get(target, key, receiver);
 					},
 					set: function(target, key, value, receiver) {
+
+						if(typeof value === 'object' && value !== null){
+							value = Proxxy(value);
+						}
+
+						if(typeof value === 'array' && value !== null){
+							value = Proxxy(value);
+						}
+
 						var r = Reflect.set(target, key, value, receiver);
 						self.update();
 						return r;
@@ -1386,7 +1395,7 @@ class mvvm{
 		}else{
 			guid = _htmlNode[0].listId;
 			htmlObject = this.forList[guid];
-			replaceableNodes = $(htmlObject[0].forChildList[0]);
+			replaceableNodes = $(htmlObject[0].forChildList[htmlObject[0].forChildList.length -1] );
 			var mList = htmlObject[0].formvvmList;
 			for(var i =0;i<mList.length;i++){
 				mList[i].stop();
