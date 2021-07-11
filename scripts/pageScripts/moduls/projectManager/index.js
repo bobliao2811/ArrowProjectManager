@@ -25,11 +25,33 @@ define(['scripts/pageScripts/moduls/projectManager/index.css','scripts/pageScrip
                 self.addNewProject();
             });
 
-            //this.html.find('[data-event=enter]').click(function(){
-            //    self.config.enterProjectCall();
-            //});
+            this.html.find('[data-event=moveProject]').click(function(){
+                ac.showLoad();
+                setTimeout(() => {
+                  self.moveProject();
+                }, 100)
+                
+            });
+
             this.html.find('[data-event=back]').click(function(){
                 self.config.backCall();
+            });
+        }
+
+        //迁移项目
+        this.moveProject = function(){
+             using('scripts/pageScripts/moduls/projectManager/moveProject/index.js',function(_moveProject){
+                var moveProject = new _moveProject({ditem:self.config.ditem,doneCall:function(){
+                  moveProject.hide(function(){
+                    moveProject.distroy();
+                  });
+                  self.loadList();
+                },cancelCall:function(){
+                    moveProject.hide(function(){
+                        moveProject.distroy();
+                    });
+                }});
+                moveProject.init();
             });
         }
 

@@ -9,8 +9,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 define(function () {
-  "use strict";
-  //mvvm组件
+  "use strict"; //mvvm组件
   //廖力编写
   //2019年09月11日
   //依赖jquery1.8.1及以上版本
@@ -183,7 +182,7 @@ define(function () {
 
         }, {
           key: "init",
-          value: function init() {
+          value: function init(_callBack) {
             var self = this; //执行创建回调函数
 
             this.config.create(function () {
@@ -196,6 +195,10 @@ define(function () {
               self.start(); //执行创建后回调函数
 
               self.config.created();
+
+              if (typeof _callBack === 'function') {
+                _callBack();
+              }
             });
           } //解析html文件并和数据进行绑定
 
@@ -1414,6 +1417,8 @@ define(function () {
                     return Reflect.get(target, key, receiver);
                   },
                   set: function set(target, key, value, receiver) {
+                    var r = Reflect.set(target, key, value, receiver);
+
                     if (_typeof(value) === 'object' && value !== null) {
                       value = Proxxy(value);
                     }
@@ -1422,7 +1427,6 @@ define(function () {
                       value = Proxxy(value);
                     }
 
-                    var r = Reflect.set(target, key, value, receiver);
                     self.update();
                     return r;
                   }
@@ -1572,6 +1576,8 @@ define(function () {
 
             htmlObject[0].forChildList = [];
             var forMvvmList = [];
+            var sfddi = JSON.stringify(self.data);
+            data = JSON.parse(JSON.stringify(data));
 
             for (var i = 0; i < data.length; i++) {
               var di = data[i];
@@ -1594,9 +1600,9 @@ define(function () {
               } //重新组装给到for的mvvm数据
 
 
-              var fddi = JSON.parse(JSON.stringify(self.data));
+              var fddi = JSON.parse(sfddi);
+              var fdgdi = JSON.parse(sfddi);
               fddi['item'] = di;
-              var fdgdi = JSON.parse(JSON.stringify(self.data));
               fdgdi['item'] = gdi;
               var html = $(htmlTemp);
               self.bindModulEvents(html, fddi);
@@ -1621,11 +1627,12 @@ define(function () {
                 _fmv.isForItem = true;
               })(fmv, this);
 
-              fmv.init();
-              forMvvmList.push(fmv);
-              fmv.htmlObject.data('currentData', di);
-              htmlObject[0].forChildList.push(fmv.htmlObject);
-              fmv.htmlObject.insertBefore(ghostNode);
+              fmv.init(function () {
+                forMvvmList.push(fmv);
+                fmv.htmlObject.data('currentData', di);
+                htmlObject[0].forChildList.push(fmv.htmlObject);
+                fmv.htmlObject.insertBefore(ghostNode);
+              });
             }
 
             htmlObject[0].formvvmList = forMvvmList;

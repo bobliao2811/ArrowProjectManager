@@ -60,7 +60,11 @@ define(['scripts/pageScripts/moduls/projectControl/incrementRelease/index.css','
         		_parentNode.childrenNode.show();
         		if(typeof _isSelect!== 'undefined'){
         			for(var i =0;i<_parentNode.children.length;i++){
-        				_parentNode.children[i].elem.find('.chackBox-custom').trigger('click');
+						(function(_i){
+							ac.eec.qurrer.push({call:function(){
+								_parentNode.children[_i].elem.find('.chackBox-custom').trigger('click');
+							},time:10});
+						})(i);
         			}
         		}
         		return _parentNode.childrenNode;
@@ -159,7 +163,11 @@ define(['scripts/pageScripts/moduls/projectControl/incrementRelease/index.css','
                        }
                     });
                     if(typeof _isSelect!== 'undefined'){
-	        			_fNode.elem.find('.chackBox-custom').trigger('click');
+						(function(_fNode){
+							ac.eec.qurrer.push({call:function(){
+								_fNode.elem.find('.chackBox-custom').trigger('click');
+							},time:1});
+						})(_fNode);
 	        		}
 
 

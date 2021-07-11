@@ -83,6 +83,69 @@ define(['/common/common.css'],function(){
 			});
 		}
 
+
+		//任务管理器
+		var _eventController = function(){
+			var self = this;
+
+			this.qurrer = [];
+
+			this.timer = null;
+
+			this.isStoped = false;
+
+			this.init = function(){
+				this.setTimer(9);
+			}
+
+			this.stopTimer = function(){
+				window.clearTimeout(this.timer);
+				this.timer = null;
+				this.isStoped = true;
+			}
+
+			this.contiune = function(){
+				this.isStoped = false;
+				this.setTimer(9);
+			}
+
+			this.setTimer = function(_sec){
+				if(this.isStoped === true){
+					return;
+				}
+				this.timer = window.setTimeout(function(){
+					if(self.qurrer.length !== 0 && _sec === 9){
+						self.setTimer(self.qurrer[0].time);
+						return;
+					}
+					//每执行一个事件任务就删掉一个事件任务
+					var newArr = [];
+					for(var i=0;i<self.qurrer.length;i++){
+						var item = self.qurrer[i].call;
+						if(i === 0){
+							try{
+								item();
+							}catch(_e){
+								throw _e;
+								continue;
+							}
+						}else{
+							newArr.push(self.qurrer[i]);
+						}
+					}
+					self.qurrer = newArr;
+					if(self.qurrer.length === 0){
+						self.setTimer(9);
+					}else{
+						self.setTimer(self.qurrer[0].time);
+					}
+				},_sec);
+			}
+		}
+
+		this.eec = new _eventController();
+		eec.init();
+
 		//窗体变更大小
 		this.resize = function(){
 			if(self.console){

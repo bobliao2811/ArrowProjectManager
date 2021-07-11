@@ -126,8 +126,28 @@ p,ul,li,a,div{margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;cursor: default;}
 	background-color: #76c1e2;
 }
 
+
+.button.dblue{
+	background-color: #aeb4d4;
+}
+
+.button.dblue:hover{
+	background-color: #9ea0a9;
+}
+
+.button.dblue:active{
+	background-color: #8990b1;
+}
+
 .button.plus{
 	background-image: url(../images/plusIcon.gif);
+	background-repeat: no-repeat;
+	background-position: 23px center;
+	text-indent: 32px;
+}
+
+.button.import{
+	background-image: url(../images/importIcon.gif);
 	background-repeat: no-repeat;
 	background-position: 23px center;
 	text-indent: 32px;

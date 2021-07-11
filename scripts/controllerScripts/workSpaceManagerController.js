@@ -249,6 +249,23 @@ const workSpaceManagerController = function(_window,_app){
 		});
 	}
 
+	//判断是否有工程配置文件
+	this.isHaveProjectConfig = function(_args,_callBack){
+		this.fs.exists(_args.path + "project.acfg" ,function (flag) {
+			if(flag === false){
+				_callBack({
+						isHave:flag,
+						config:{}
+					});
+			}else{
+				_callBack({
+						isHave:flag,
+						config:self.fs.readFileSync(_args.path + "project.acfg",'utf-8')
+					});
+			}
+		});
+	}
+
 	//新建工程新建文件夹
 	this.newProjectNewForder = function(_args,_callBack){
 		//判断工程文件夹是否存在

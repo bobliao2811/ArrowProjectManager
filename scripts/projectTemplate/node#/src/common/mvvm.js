@@ -159,7 +159,7 @@ class mvvm{
 	}
 
 	//初始化
-	init(){
+	init(_callBack){
 		var self = this;
 		//执行创建回调函数
 		this.config.create(function(){
@@ -172,6 +172,9 @@ class mvvm{
 			self.start();
 			//执行创建后回调函数
 			self.config.created();
+			if(typeof _callBack === 'function'){
+				_callBack()
+			}
 		});
 	}
 
@@ -1273,7 +1276,7 @@ class mvvm{
 						return Reflect.get(target, key, receiver);
 					},
 					set: function(target, key, value, receiver) {
-
+						var r = Reflect.set(target, key, value, receiver);
 						if(typeof value === 'object' && value !== null){
 							value = Proxxy(value);
 						}
@@ -1281,9 +1284,8 @@ class mvvm{
 						if(typeof value === 'array' && value !== null){
 							value = Proxxy(value);
 						}
-
-						var r = Reflect.set(target, key, value, receiver);
 						self.update();
+
 						return r;
 					},
 				});
@@ -1417,6 +1419,8 @@ class mvvm{
 		htmlObject[0].forChildList = [];
 
 		var forMvvmList = [];
+		var sfddi = JSON.stringify(self.data);
+		data = JSON.parse(JSON.stringify(data));
 		for(var i=0;i<data.length;i++){
 			var di = data[i];
 			var gdi = gvalue[i];
@@ -1431,9 +1435,9 @@ class mvvm{
 				gdi['i'] = i;
 			}
 			//重新组装给到for的mvvm数据
-			var fddi = JSON.parse(JSON.stringify(self.data));
+			var fddi = JSON.parse(sfddi);
+			var fdgdi = JSON.parse(sfddi);
 			fddi['item'] = di;
-			var fdgdi = JSON.parse(JSON.stringify(self.data));
 			fdgdi['item'] = gdi;
 			var html = $(htmlTemp);
 			self.bindModulEvents(html,fddi);
@@ -1457,11 +1461,14 @@ class mvvm{
 				_fmv.isForItem = true;
 			})(fmv,this)
 
-			fmv.init();
-			forMvvmList.push(fmv);
-			fmv.htmlObject.data('currentData',di);
-			htmlObject[0].forChildList.push(fmv.htmlObject);
-			fmv.htmlObject.insertBefore(ghostNode);
+
+
+			fmv.init(function(){
+				forMvvmList.push(fmv);
+				fmv.htmlObject.data('currentData',di);
+				htmlObject[0].forChildList.push(fmv.htmlObject);
+				fmv.htmlObject.insertBefore(ghostNode);
+			});
 		}
 		htmlObject[0].formvvmList = forMvvmList;
 		htmlObject.trigger('change');
