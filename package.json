@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "chokidar": "^3.0.2",
-    "electron": "^5.0.8",
+    "electron": "^11.5.0",
     "images": "^3.0.2",
     "jsdom": "^15.2.0",
     "opn": "^6.0.0",
